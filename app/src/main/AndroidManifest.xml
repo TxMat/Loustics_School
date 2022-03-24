@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LousticsSchool">
         <activity
+            android:name=".MathActivity"
+            android:exported="true"
+            android:label="@string/title_activity_math"
+            android:theme="@style/Theme.LousticsSchool.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
