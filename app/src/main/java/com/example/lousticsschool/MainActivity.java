@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+                intent.putExtra(MathActivity.CALCUL, "20 * 10 = ");
                 startActivity(intent);
             }
         });
