@@ -52,22 +52,17 @@ public class MathActivity extends AppCompatActivity {
             Calc.setText(firstNumber + " " + operator + " " + secondNumber + " = ");
 
             Button next = findViewById(R.id.next);
-            next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
+            next.setOnClickListener(view -> {
+                if (Anwser.getText().toString().trim().length() != 0)
+                finish();
             });
 
-            Anwser.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                    if (i == EditorInfo.IME_ACTION_DONE) {
-                        finish();
-                        return true;
-                    }
-                    return false;
+            Anwser.setOnEditorActionListener((textView, i, keyEvent) -> {
+                if (i == EditorInfo.IME_ACTION_DONE && Anwser.getText().toString().trim().length() != 0) {
+                    finish();
+                    return true;
                 }
+                return false;
             });
         }
     }
