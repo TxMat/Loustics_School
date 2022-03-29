@@ -2,7 +2,9 @@ package com.example.lousticsschool;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -54,19 +56,75 @@ public class MathActivity extends AppCompatActivity {
             Button next = findViewById(R.id.next);
             next.setOnClickListener(view -> {
                 if (Anwser.getText().toString().trim().length() != 0)
-                finish();
+                CheckResult();
             });
 
             Anwser.setOnEditorActionListener((textView, i, keyEvent) -> {
                 if (i == EditorInfo.IME_ACTION_DONE && Anwser.getText().toString().trim().length() != 0) {
-                    finish();
+                    CheckResult();
                     return true;
                 }
                 return false;
             });
         }
     }
+
+    public void CheckResult() {
+        TextView Calc = findViewById(R.id.MathTextView);
+        EditText Anwser = findViewById(R.id.Answer);
+        // set the text to green if the user has entered the correct answer
+        if (Integer.parseInt(Anwser.getText().toString()) == RESULT) {
+            Anwser.setTextColor(Color.GREEN);
+            Calc.setTextColor(Color.GREEN);
+        } else {
+            // set the text to red if the user has entered the wrong answer and display the correct answer
+            Anwser.setTextColor(Color.RED);
+            Calc.setTextColor(Color.RED);
+        }
+        // wait for 2 seconds
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                finish();
+            }
+        }, 2000);
+    }
+
+
+    public static int getRandomInt(int min, int max) {
+        return (int) (Math.random() * ((max - min) + 1)) + min;
+    }
+
+    // a method that randomises the OPERATOR, FIRST_NUMBER and SECOND_NUMBER
+    public static Bundle getRandomBundle(int min, int max) {
+        String operator = "+-x/".charAt((int) (Math.random() * 4)) + "";
+        int randomSecondNumber;
+        int randomFirstNumber;
+        if (operator.equals("x")) {
+            max = max / 10;
+        }
+        randomFirstNumber = getRandomInt(min, max);
+        if (operator.equals("/")) {
+            max = max / 10;
+        }
+        randomSecondNumber = getRandomInt(min, max);
+        while (operator.equals("/") && randomFirstNumber % randomSecondNumber != 0) {
+            randomFirstNumber = getRandomInt(min, max);
+            randomSecondNumber = getRandomInt(min, max/10);
+        }
+
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FIRST_NUMBER, String.valueOf(randomFirstNumber));
+        bundle.putString(OPERATOR, operator);
+        bundle.putString(SECOND_NUMBER, String.valueOf(randomSecondNumber));
+        return bundle;
+    }
+
+
 }
+
+
 
    /* @Override
     protected void onCreate(Bundle savedInstanceState) {

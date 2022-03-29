@@ -18,9 +18,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-                intent.putExtra(MathActivity.FIRST_NUMBER, "10");
-                intent.putExtra(MathActivity.OPERATOR, "+");
-                intent.putExtra(MathActivity.SECOND_NUMBER, "20");
+                intent.putExtras(MathActivity.getRandomBundle(2,100)); // operations with 0 and 1 are too easy
                 startActivity(intent);
             }
         });
