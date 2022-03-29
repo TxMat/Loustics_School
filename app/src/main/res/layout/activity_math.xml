@@ -45,7 +45,7 @@
             android:autofillHints="\?"
             android:fontFamily="casual"
             android:hint="@string/QuestionMark"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:textSize="48sp"
             android:typeface="normal"
             android:imeOptions="actionDone"/>

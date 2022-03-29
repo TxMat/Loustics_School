@@ -14,13 +14,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = findViewById(R.id.btn1);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-                intent.putExtras(MathActivity.getRandomBundle(2,100)); // operations with 0 and 1 are too easy
-                startActivity(intent);
-            }
+        btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+            intent.putExtras(MathActivity.getRandomBundle(2,100)); // operations with 0 and 1 are too easy
+            startActivity(intent);
         });
     }
 }

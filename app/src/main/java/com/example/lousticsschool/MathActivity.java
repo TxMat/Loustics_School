@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +17,17 @@ public class MathActivity extends AppCompatActivity {
     public static final String OPERATOR = "DEFAULT_OPERATOR";
     public static final String SECOND_NUMBER = "N2";
     public static int RESULT = -1;
+    private TextView Calc;
+    private EditText Answer;
+    private Button Next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math);
 
-        TextView Calc = findViewById(R.id.MathTextView);
-        EditText Anwser = findViewById(R.id.Answer);
+        Calc = findViewById(R.id.MathTextView);
+        Answer = findViewById(R.id.Answer);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -53,14 +54,14 @@ public class MathActivity extends AppCompatActivity {
             }
             Calc.setText(firstNumber + " " + operator + " " + secondNumber + " = ");
 
-            Button next = findViewById(R.id.next);
-            next.setOnClickListener(view -> {
-                if (Anwser.getText().toString().trim().length() != 0)
+            Next = findViewById(R.id.next);
+            Next.setOnClickListener(view -> {
+                if (Answer.getText().toString().trim().length() != 0)
                 CheckResult();
             });
 
-            Anwser.setOnEditorActionListener((textView, i, keyEvent) -> {
-                if (i == EditorInfo.IME_ACTION_DONE && Anwser.getText().toString().trim().length() != 0) {
+            Answer.setOnEditorActionListener((textView, i, keyEvent) -> {
+                if (i == EditorInfo.IME_ACTION_DONE && Answer.getText().toString().trim().length() != 0) {
                     CheckResult();
                     return true;
                 }
@@ -70,15 +71,15 @@ public class MathActivity extends AppCompatActivity {
     }
 
     public void CheckResult() {
-        TextView Calc = findViewById(R.id.MathTextView);
-        EditText Anwser = findViewById(R.id.Answer);
         // set the text to green if the user has entered the correct answer
-        if (Integer.parseInt(Anwser.getText().toString()) == RESULT) {
-            Anwser.setTextColor(Color.GREEN);
+        Answer.setEnabled(false);
+        Next.setEnabled(false);
+        if (Integer.parseInt(Answer.getText().toString()) == RESULT) {
+            Answer.setTextColor(Color.GREEN);
             Calc.setTextColor(Color.GREEN);
         } else {
             // set the text to red if the user has entered the wrong answer and display the correct answer
-            Anwser.setTextColor(Color.RED);
+            Answer.setTextColor(Color.RED);
             Calc.setTextColor(Color.RED);
         }
         // wait for 2 seconds
