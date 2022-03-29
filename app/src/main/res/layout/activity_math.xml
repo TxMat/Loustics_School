@@ -4,29 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:id="@+id/mathlayout">
 
-    <TextView
-        android:id="@+id/MathTextView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/QuestionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="[ 1 / 10 ]"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:typeface="normal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="119dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/MathTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:textSize="48sp"
+            android:typeface="normal" />
+
+        <EditText
+            android:id="@+id/Answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="\?"
+            android:fontFamily="casual"
+            android:hint="@string/QuestionMark"
+            android:inputType="number"
+            android:textSize="48sp"
+            android:typeface="normal"
+            android:imeOptions="actionDone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        tools:layout_conversion_absoluteHeight="19dp"
-        tools:layout_conversion_absoluteWidth="0dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="14dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        >
 
-    <EditText
-        android:id="@+id/Answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="\?"
-        android:inputType="number"
-        android:minHeight="48dp"
-        tools:layout_conversion_absoluteHeight="45dp"
-        tools:layout_conversion_absoluteWidth="20dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        <Button
+            android:id="@+id/previous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="@string/previous" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next" />
+    </LinearLayout>
+
 
 </LinearLayout>
 
