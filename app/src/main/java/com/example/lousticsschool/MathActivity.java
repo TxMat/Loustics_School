@@ -2,12 +2,15 @@ package com.example.lousticsschool;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MathActivity extends AppCompatActivity {
@@ -16,10 +19,16 @@ public class MathActivity extends AppCompatActivity {
     public static final String FIRST_NUMBER = "N1";
     public static final String OPERATOR = "DEFAULT_OPERATOR";
     public static final String SECOND_NUMBER = "N2";
+    public static final String QUESTION_NUMBER = "QUESTION_NUMBER";
+    public static final String TOTAL_QUESTIONS = "TOTAL_QUESTIONS";
     public static int RESULT = -1;
     private TextView Calc;
     private EditText Answer;
     private Button Next;
+    private Button Previous;
+    private LinearLayout QALayout;
+    private TextView QuestionNumber;
+    private int question_nb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +37,18 @@ public class MathActivity extends AppCompatActivity {
 
         Calc = findViewById(R.id.MathTextView);
         Answer = findViewById(R.id.Answer);
+        Previous = findViewById(R.id.Previous);
+        QALayout = findViewById(R.id.QALayout);
+        QuestionNumber = findViewById(R.id.QuestionNumber);
+
 
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {
             int firstNumber = Integer.parseInt(bundle.getString(FIRST_NUMBER));
             int secondNumber = Integer.parseInt(bundle.getString(SECOND_NUMBER));
+            question_nb = Integer.parseInt(bundle.getString(QUESTION_NUMBER));
             String operator = bundle.getString(OPERATOR);
-            System.out.println(firstNumber);
-            System.out.println(FIRST_NUMBER);
-            System.out.println(secondNumber);
-            System.out.println(operator);
             switch (operator) {
                 case "+":
                     RESULT = firstNumber + secondNumber;
@@ -53,6 +64,7 @@ public class MathActivity extends AppCompatActivity {
                     break;
             }
             Calc.setText(firstNumber + " " + operator + " " + secondNumber + " = ");
+            QuestionNumber.setText("Question " + question_nb + "/" + bundle.getString(TOTAL_QUESTIONS));
 
             Next = findViewById(R.id.next);
             Next.setOnClickListener(view -> {
@@ -81,14 +93,15 @@ public class MathActivity extends AppCompatActivity {
             // set the text to red if the user has entered the wrong answer and display the correct answer
             Answer.setTextColor(Color.RED);
             Calc.setTextColor(Color.RED);
+            QALayout.startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
         }
-        // wait for 2 seconds
+        // wait for 1 seconds
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                finish();
-            }
-        }, 2000);
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+            intent.putExtras(getNextBundle());
+            startActivity(intent);
+        }, 1000);
     }
 
 
@@ -122,21 +135,21 @@ public class MathActivity extends AppCompatActivity {
         return bundle;
     }
 
+    public static Bundle getFirstBundle(int questionNumber) {
+        Bundle bundle = new Bundle();
+        bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
+        bundle.putString(QUESTION_NUMBER, "1");
+        bundle.putString(TOTAL_QUESTIONS, String.valueOf(questionNumber));
+        return bundle;
+    }
+
+    public Bundle getNextBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
+        bundle.putString(QUESTION_NUMBER, String.valueOf(question_nb + 1));
+        return bundle;
+    }
+
+
 
 }
-
-
-
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_math);
-        Bundle extras = getIntent().getExtras();
-        String operator = extras.getString(OPERATOR);
-        int firstNumber = extras.getInt(FIRST_NUMBER);
-        int secondNumber = extras.getInt(SECOND_NUMBER);
-        String calc = getIntent().getStringExtra(firstNumber + " " + operator + " " + secondNumber + " = ");
-        TextView calcView = findViewById(R.id.MathTextView);
-        calcView.setText(calc);
-    }
-*/

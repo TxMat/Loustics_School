@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btn1);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-            intent.putExtras(MathActivity.getRandomBundle(2,100)); // operations with 0 and 1 are too easy
+            intent.putExtras(MathActivity.getFirstBundle(10)); // передача параметров в другой активити
             startActivity(intent);
         });
     }
