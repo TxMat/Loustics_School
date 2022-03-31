@@ -20,12 +20,6 @@ import java.util.HashMap;
 public class MathActivity extends AppCompatActivity {
 
 
-    public static final String FIRST_NUMBER = "N1";
-    public static final String OPERATOR = "DEFAULT_OPERATOR";
-    public static final String SECOND_NUMBER = "N2";
-    public static final String QUESTION_NUMBER = "QUESTION_NUMBER";
-    public static final String TOTAL_QUESTIONS = "TOTAL_QUESTIONS";
-    public static final String STATUS_HASHMAP = "STATUS_HASHMAP";
     public static int RESULT = -1;
     private TextView Calc;
     private EditText Answer;
@@ -65,13 +59,14 @@ public class MathActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
+
         if (bundle != null) {
-            int firstNumber = Integer.parseInt(bundle.getString(FIRST_NUMBER));
-            int secondNumber = Integer.parseInt(bundle.getString(SECOND_NUMBER));
-            question_nb = Integer.parseInt(bundle.getString(QUESTION_NUMBER));
-            total_questions = Integer.parseInt(bundle.getString(TOTAL_QUESTIONS));
-            status_hashmap = (HashMap<String, Boolean>) bundle.getSerializable(STATUS_HASHMAP);
-            String operator = bundle.getString(OPERATOR);
+            int firstNumber = bundle.getInt("FIRST_NUMBER");
+            int secondNumber = bundle.getInt("SECOND_NUMBER");
+            question_nb = bundle.getInt("QUESTION_NUMBER");
+            total_questions = bundle.getInt("TOTAL_QUESTIONS");
+            status_hashmap = (HashMap<String, Boolean>) bundle.getSerializable("STATUS_HASHMAP");
+            String operator = bundle.getString("OPERATOR");
             switch (operator) {
                 case "+":
                     RESULT = firstNumber + secondNumber;
@@ -87,23 +82,14 @@ public class MathActivity extends AppCompatActivity {
                     break;
             }
             Calc.setText(firstNumber + " " + operator + " " + secondNumber + " = ");
-            QuestionNumber.setText("Question " + question_nb + "/" + bundle.getString(TOTAL_QUESTIONS));
+            QuestionNumber.setText("Question " + question_nb + "/" + bundle.getInt("TOTAL_QUESTIONS"));
 
 
-            Next.setOnClickListener(view -> {
-                if (Answer.getText().toString().trim().length() != 0)
-                CheckResult();
-            });
+            Next.setOnClickListener(view -> CheckResult());
 
             Previous.setOnClickListener(view -> onBackPressed());
 
-            Answer.setOnEditorActionListener((textView, i, keyEvent) -> {
-                if (i == EditorInfo.IME_ACTION_DONE && Answer.getText().toString().trim().length() != 0) {
-                    CheckResult();
-                    return true;
-                }
-                return false;
-            });
+            Answer.setOnEditorActionListener((textView, i, keyEvent) -> CheckResult());
             // ask for confirmation in a dialog when the user clicks on the quit button
             Quit.setOnClickListener(view -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MathActivity.this);
@@ -111,6 +97,8 @@ public class MathActivity extends AppCompatActivity {
                 builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
                 builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    //clear all the activity stack
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }
@@ -123,8 +111,11 @@ public class MathActivity extends AppCompatActivity {
         }
     }
 
-    public void CheckResult() {
+    public boolean CheckResult() {
         // set the text to green if the user has entered the correct answer
+        if (Answer.getText().toString().trim().length() == 0 || Answer.getText().toString().equals("-")) {
+            return false;
+        }
         Answer.setEnabled(false);
         Next.setEnabled(false);
         Previous.setEnabled(false);
@@ -152,6 +143,7 @@ public class MathActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
 
         }, 1000);
+        return true;
     }
 
 
@@ -159,16 +151,9 @@ public class MathActivity extends AppCompatActivity {
         return (int) (Math.random() * ((max - min) + 1)) + min;
     }
 
-    public ArrayList<String> RandomizeCalc(int min, int max){
-        ArrayList<String> result = RandomizeCalcNoCheck(min, max);
-        // check that the result is not in the hashmap already if not randomize again
-        while (status_hashmap.containsKey(result.get(0) + result.get(1) + result.get(2))) {
-            result = RandomizeCalcNoCheck(min, max);
-        }
-        return result;
-    }
 
-    public static ArrayList<String> RandomizeCalcNoCheck(int min, int max){
+    public static Bundle RandomizeCalcNoCheck(int min, int max){
+        Bundle bundle = new Bundle();
         String operator = "+-x/".charAt((int) (Math.random() * 4)) + "";
         int randomSecondNumber;
         int randomFirstNumber;
@@ -184,41 +169,40 @@ public class MathActivity extends AppCompatActivity {
             randomFirstNumber = getRandomInt(min, max);
             randomSecondNumber = getRandomInt(min, max/10);
         }
-        ArrayList<String> result = new ArrayList<>();
-        result.add(randomFirstNumber + "");
-        result.add(operator);
-        result.add(randomSecondNumber + "");
-        return result;
+        bundle.putString("OPERATOR", operator);
+        bundle.putInt("FIRST_NUMBER", randomFirstNumber);
+        bundle.putInt("SECOND_NUMBER", randomSecondNumber);
+        return bundle;
     }
 
-    // a method that randomises the OPERATOR, FIRST_NUMBER and SECOND_NUMBER
-    public static Bundle getRandomBundle(int min, int max) {
-
-        ArrayList<String> result = RandomizeCalcNoCheck(min, max);
-        Bundle bundle = new Bundle();
-        bundle.putString("FIRST_NUMBER", result.get(0));
-        bundle.putString("OPERATOR", result.get(1));
-        bundle.putString("SECOND_NUMBER", result.get(2));
+    public Bundle RandomizeCalc(int min, int max){
+        // Get the bundle from RandomizeCalcNoCheck and check if the result is not already in the hashmap (avoid duplicates)
+        // if so get another random bundle
+        Bundle bundle = RandomizeCalcNoCheck(min, max);
+        String result = bundle.getInt("FIRST_NUMBER") + " " + bundle.getString("OPERATOR") + " " + bundle.getInt("SECOND_NUMBER");
+        while (status_hashmap.containsKey(result)) {
+            bundle = RandomizeCalcNoCheck(min, max);
+            result = bundle.getInt("FIRST_NUMBER") + " " + bundle.getString("OPERATOR") + " " + bundle.getInt("SECOND_NUMBER");
+        }
         return bundle;
     }
 
     public static Bundle getFirstBundle(int questionNumber) {
         Bundle bundle = new Bundle();
-        bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
-        bundle.putString(QUESTION_NUMBER, "1");
-        bundle.putString(TOTAL_QUESTIONS, String.valueOf(questionNumber));
+        bundle.putAll(RandomizeCalcNoCheck(2,100)); // operations with 0 and 1 are too easy
+        bundle.putInt("QUESTION_NUMBER", 1);
+        bundle.putInt("TOTAL_QUESTIONS", questionNumber);
         HashMap<String, Boolean> status_hashmap = new HashMap<>();
-        bundle.putSerializable(STATUS_HASHMAP, status_hashmap);
-
+        bundle.putSerializable("STATUS_HASHMAP", status_hashmap);
         return bundle;
     }
 
     public Bundle getNextBundle(){
         Bundle bundle = new Bundle();
-        bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
-        bundle.putString(QUESTION_NUMBER, String.valueOf(question_nb + 1));
-        bundle.putString(TOTAL_QUESTIONS, String.valueOf(total_questions));
-        bundle.putSerializable(STATUS_HASHMAP, status_hashmap);
+        bundle.putAll(RandomizeCalc(2,100)); // operations with 0 and 1 are too easy
+        bundle.putInt("QUESTION_NUMBER", question_nb + 1);
+        bundle.putInt("TOTAL_QUESTIONS", total_questions);
+        bundle.putSerializable("STATUS_HASHMAP", status_hashmap);
         return bundle;
     }
 

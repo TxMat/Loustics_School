@@ -1,5 +1,6 @@
 package com.example.lousticsschool;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,7 +17,19 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
             intent.putExtras(MathActivity.getFirstBundle(10));
+            System.out.println(intent.getExtras().getString("OPERATOR"));
             startActivity(intent);
         });
+    }
+
+    //ask for a confirmation when the user wants to exit the app using the back button
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this)
+                .setTitle("Lousics School")
+                .setMessage("Veux-tu vraiment quitter l'application?")
+                .setPositiveButton("Oui", (dialog, which) -> finish())
+                .setNegativeButton("Non", null)
+                .show();
     }
 }
