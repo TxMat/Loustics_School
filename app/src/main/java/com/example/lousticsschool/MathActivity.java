@@ -134,13 +134,25 @@ public class MathActivity extends AppCompatActivity {
         // wait for 1 seconds
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Next.setEnabled(true);
-            Previous.setEnabled(true);
-            Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-            intent.putExtras(getNextBundle());
-            // add a slide animation when starting the next activity
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
+            // if the user has answered all the questions fininsh the activity and clear the activity stack
+            if (question_nb == total_questions) {
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("STATUS_HASHMAP", status_hashmap);
+                intent.putExtra("TOTAL_QUESTIONS", total_questions);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                finish();
+            } else {
+                // if the user has not answered all the questions, go to the next question
+                Next.setEnabled(true);
+                Previous.setEnabled(true);
+                Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+                intent.putExtras(getNextBundle());
+                // add a slide animation when starting the next activity
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
+            }
 
         }, 1000);
         return true;
