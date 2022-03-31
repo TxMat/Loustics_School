@@ -11,6 +11,7 @@
         android:theme="@style/Theme.LousticsSchool">
         <activity
             android:name=".MathActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
