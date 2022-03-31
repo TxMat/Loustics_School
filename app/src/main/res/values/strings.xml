@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Loustics School</string>
     <string name="QuestionMark">\?</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Precedent</string>
+    <string name="quitter">Abandonner</string>
 </resources>

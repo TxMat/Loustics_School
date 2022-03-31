@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 public class MathActivity extends AppCompatActivity {
 
 
@@ -21,6 +23,7 @@ public class MathActivity extends AppCompatActivity {
     public static final String SECOND_NUMBER = "N2";
     public static final String QUESTION_NUMBER = "QUESTION_NUMBER";
     public static final String TOTAL_QUESTIONS = "TOTAL_QUESTIONS";
+    public static final String STATUS_HASHMAP = "STATUS_HASHMAP";
     public static int RESULT = -1;
     private TextView Calc;
     private EditText Answer;
@@ -29,6 +32,9 @@ public class MathActivity extends AppCompatActivity {
     private LinearLayout QALayout;
     private TextView QuestionNumber;
     private int question_nb;
+    private HashMap<String, Boolean> status_hashmap;
+    private int total_questions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,8 @@ public class MathActivity extends AppCompatActivity {
             int firstNumber = Integer.parseInt(bundle.getString(FIRST_NUMBER));
             int secondNumber = Integer.parseInt(bundle.getString(SECOND_NUMBER));
             question_nb = Integer.parseInt(bundle.getString(QUESTION_NUMBER));
+            total_questions = Integer.parseInt(bundle.getString(TOTAL_QUESTIONS));
+            status_hashmap = (HashMap<String, Boolean>) bundle.getSerializable(STATUS_HASHMAP);
             String operator = bundle.getString(OPERATOR);
             switch (operator) {
                 case "+":
@@ -86,7 +94,9 @@ public class MathActivity extends AppCompatActivity {
         // set the text to green if the user has entered the correct answer
         Answer.setEnabled(false);
         Next.setEnabled(false);
-        if (Integer.parseInt(Answer.getText().toString()) == RESULT) {
+        Previous.setEnabled(false);
+        boolean isCorrect = Integer.parseInt(Answer.getText().toString()) == RESULT;
+        if (isCorrect) {
             Answer.setTextColor(Color.GREEN);
             Calc.setTextColor(Color.GREEN);
         } else {
@@ -95,9 +105,12 @@ public class MathActivity extends AppCompatActivity {
             Calc.setTextColor(Color.RED);
             QALayout.startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
         }
+        status_hashmap.put(Calc.getText().toString(), isCorrect);
         // wait for 1 seconds
         Handler handler = new Handler();
         handler.postDelayed(() -> {
+            Next.setEnabled(true);
+            Previous.setEnabled(true);
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
             intent.putExtras(getNextBundle());
             startActivity(intent);
@@ -140,6 +153,8 @@ public class MathActivity extends AppCompatActivity {
         bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
         bundle.putString(QUESTION_NUMBER, "1");
         bundle.putString(TOTAL_QUESTIONS, String.valueOf(questionNumber));
+        HashMap<String, Boolean> status_hashmap = new HashMap<>();
+        bundle.putSerializable(STATUS_HASHMAP, status_hashmap);
         return bundle;
     }
 
@@ -147,6 +162,17 @@ public class MathActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
         bundle.putString(QUESTION_NUMBER, String.valueOf(question_nb + 1));
+        bundle.putString(TOTAL_QUESTIONS, String.valueOf(total_questions));
+        bundle.putSerializable(STATUS_HASHMAP, status_hashmap);
+        return bundle;
+    }
+
+    public Bundle getPreviousBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putAll(getRandomBundle(2,100)); // operations with 0 and 1 are too easy
+        bundle.putString(QUESTION_NUMBER, String.valueOf(question_nb - 1));
+        bundle.putString(TOTAL_QUESTIONS, String.valueOf(total_questions));
+        bundle.putSerializable(STATUS_HASHMAP, status_hashmap);
         return bundle;
     }
 
