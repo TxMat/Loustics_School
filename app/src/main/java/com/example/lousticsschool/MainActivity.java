@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btn1);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-            intent.putExtras(MathActivity.getFirstBundle(2));
+            intent.putExtras(MathActivity.getFirstBundle(10));
             System.out.println(intent.getExtras().getString("OPERATOR"));
             startActivity(intent);
         });

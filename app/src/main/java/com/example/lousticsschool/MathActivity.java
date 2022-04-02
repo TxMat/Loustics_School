@@ -1,20 +1,20 @@
 package com.example.lousticsschool;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.datastore.rxjava3.RxDataStore;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.Preference;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MathActivity extends AppCompatActivity {
@@ -31,6 +31,8 @@ public class MathActivity extends AppCompatActivity {
     private int question_nb;
     private HashMap<String, Boolean> status_hashmap;
     private int total_questions;
+    private boolean is_answered;
+    private RxDataStore<Preference> CalcDataStore;
 
 
 
@@ -55,6 +57,8 @@ public class MathActivity extends AppCompatActivity {
         Next = findViewById(R.id.next);
         Previous = findViewById(R.id.Previous);
         Quit = findViewById(R.id.Quit);
+        // init CalcDataStore
+        //CalcDataStore =
 
 
         Bundle bundle = getIntent().getExtras();
@@ -83,6 +87,9 @@ public class MathActivity extends AppCompatActivity {
             }
             Calc.setText(firstNumber + " " + operator + " " + secondNumber + " = ");
             QuestionNumber.setText("Question " + question_nb + "/" + bundle.getInt("TOTAL_QUESTIONS"));
+            if (question_nb < 1) { // < instead of == for security reasons
+                Previous.setEnabled(false);
+            }
 
 
             Next.setOnClickListener(view -> CheckResult());
@@ -120,43 +127,60 @@ public class MathActivity extends AppCompatActivity {
         Next.setEnabled(false);
         Previous.setEnabled(false);
         Quit.setEnabled(false);
-        boolean isCorrect = Integer.parseInt(Answer.getText().toString()) == RESULT;
-        if (isCorrect) {
-            Answer.setTextColor(Color.GREEN);
-            Calc.setTextColor(Color.GREEN);
-        } else {
-            // set the text to red if the user has entered the wrong answer and display the correct answer
-            Answer.setTextColor(Color.RED);
-            Calc.setTextColor(Color.RED);
-            QALayout.startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-        }
-        status_hashmap.put(Calc.getText().toString(), isCorrect);
-        // wait for 1 seconds
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            // if the user has answered all the questions fininsh the activity and clear the activity stack
-            if (question_nb == total_questions) {
-                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                intent.putExtra("STATUS_HASHMAP", status_hashmap);
-                intent.putExtra("TOTAL_QUESTIONS", total_questions);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
-                finish();
+        if (!is_answered){
+            boolean isCorrect = Integer.parseInt(Answer.getText().toString()) == RESULT;
+            if (isCorrect) {
+                Answer.setTextColor(Color.GREEN);
+                Calc.setTextColor(Color.GREEN);
             } else {
-                // if the user has not answered all the questions, go to the next question
-                Next.setEnabled(true);
-                Previous.setEnabled(true);
-                Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-                intent.putExtras(getNextBundle());
-                // add a slide animation when starting the next activity
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
+                // set the text to red if the user has entered the wrong answer and display the correct answer
+                Answer.setTextColor(Color.RED);
+                Calc.setTextColor(Color.RED);
+                QALayout.startAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
             }
+            status_hashmap.put(Calc.getText().toString(), isCorrect);
+            // wait for 1 seconds
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                // if the user has answered all the questions fininsh the activity and clear the activity stack
+                if (question_nb == total_questions) {
+                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                    intent.putExtra("STATUS_HASHMAP", status_hashmap);
+                    intent.putExtra("TOTAL_QUESTIONS", total_questions);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // if the user has not answered all the questions, go to the next question
+                    Next.setEnabled(true);
+                    Previous.setEnabled(true);
+                    is_answered = true;
+                    Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+                    intent.putExtras(getNextBundle());
+                    // add a slide animation when starting the next activity
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
+                }
 
-        }, 1000);
-        return true;
+            }, 1000);
+            return true;
+        } else {
+            Next.setEnabled(true);
+            Previous.setEnabled(true);
+            is_answered = true;
+            // go to perviouly exited activity
+            Intent intent = new Intent(getApplicationContext(), MathActivity.class);
+            intent.putExtras(getNextBundle());
+
+
+            // add a slide animation when starting the next activity
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
+            return true;
+        }
     }
+
+
 
 
     public static int getRandomInt(int min, int max) {
@@ -212,6 +236,19 @@ public class MathActivity extends AppCompatActivity {
     public Bundle getNextBundle(){
         Bundle bundle = new Bundle();
         bundle.putAll(RandomizeCalc(2,100)); // operations with 0 and 1 are too easy
+        bundle.putInt("QUESTION_NUMBER", question_nb + 1);
+        bundle.putInt("TOTAL_QUESTIONS", total_questions);
+        bundle.putSerializable("STATUS_HASHMAP", status_hashmap);
+        return bundle;
+    }
+
+    public Bundle getNextBundle(String next_calc){
+        Bundle bundle = new Bundle();
+        // extract the operator and the numbers from the string
+        String[] numbers = next_calc.split(" ");
+        bundle.putInt("FIRST_NUMBER", Integer.parseInt(numbers[0]));
+        bundle.putInt("SECOND_NUMBER", Integer.parseInt(numbers[2]));
+        bundle.putString("OPERATOR", numbers[1]);
         bundle.putInt("QUESTION_NUMBER", question_nb + 1);
         bundle.putInt("TOTAL_QUESTIONS", total_questions);
         bundle.putSerializable("STATUS_HASHMAP", status_hashmap);
