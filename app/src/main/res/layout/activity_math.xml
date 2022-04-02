@@ -47,10 +47,11 @@
             android:autofillHints="\?"
             android:fontFamily="casual"
             android:hint="@string/QuestionMark"
+            android:imeOptions="actionDone"
             android:inputType="numberSigned"
+            android:textColorHint="#78909C"
             android:textSize="48sp"
-            android:typeface="normal"
-            android:imeOptions="actionDone"/>
+            android:typeface="normal" />
 
     </LinearLayout>
 
@@ -67,14 +68,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
-            android:text="@string/previous" />
+            android:text="@string/previous"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/next" />
+            android:text="@string/next"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
     <LinearLayout

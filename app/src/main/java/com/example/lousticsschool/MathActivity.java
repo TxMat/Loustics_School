@@ -30,7 +30,7 @@ public class MathActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mathModel.getQuestion_nb() != 1) {
+        if (mathModel.getCurrentQuestionNb() != 1) {
             super.onBackPressed();
             overridePendingTransition(R.anim.no_transition, R.anim.slide_out_right);
         }
@@ -52,15 +52,21 @@ public class MathActivity extends AppCompatActivity {
         Previous = findViewById(R.id.Previous);
         Quit = findViewById(R.id.Quit);
 
-        Next.setEnabled(true);
-        Previous.setEnabled(mathModel.getQuestion_nb() != 1);
-        Answer.setEnabled(true);
-        Quit.setEnabled(true);
+        Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
+
+        // if we are on the last question, change the text of the next button an the color
+        if (mathModel.getCurrentQuestionNb() == mathModel.getTotalQuestionsNb()) {
+            Next.setText(R.string.finish);
+            // set the background color of the next button to the text color of Previous
+            Next.setBackgroundColor(Previous.getCurrentTextColor());
+            Next.setTextColor(Color.BLACK);
+        }
 
 
         Calc.setText(mathModel.getCalcString());
 
-        QuestionNumber.setText("Question " + mathModel.getQuestion_nb() + "/" + mathModel.getTotal_questions());
+        String QuestionNumberString = "Question " + mathModel.getCurrentQuestionNb() + "/" + mathModel.getTotalQuestionsNb();
+        QuestionNumber.setText(QuestionNumberString);
 
         Next.setOnClickListener(view -> CheckResult(Answer.getText().toString()));
 
@@ -105,14 +111,14 @@ public class MathActivity extends AppCompatActivity {
                 Previous.setEnabled(false);
                 Answer.setEnabled(false);
                 Quit.setEnabled(false);
-                // wait for 1 seconds
+                // wait for 1 second
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
                     // if the user has answered all the questions fininsh the activity and clear the activity stack
                     if (mathModel.isLastQuestion()) {
                         Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                         intent.putExtra("STATUS_HASHMAP", mathModel.getStatus_hashmap());
-                        intent.putExtra("TOTAL_QUESTIONS", mathModel.getTotal_questions());
+                        intent.putExtra("TOTAL_QUESTIONS", mathModel.getTotalQuestionsNb());
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
@@ -125,7 +131,8 @@ public class MathActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
                         Next.setEnabled(true);
-                        Previous.setEnabled(mathModel.getQuestion_nb() != 1);
+                        Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
+                        Quit.setEnabled(true);
                     }
 
                 }, 1000);

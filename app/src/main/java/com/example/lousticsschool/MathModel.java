@@ -42,7 +42,7 @@ public class MathModel {
         }
     }
 
-    public int getQuestion_nb() {
+    public int getCurrentQuestionNb() {
         return question_nb;
     }
 
@@ -64,7 +64,7 @@ public class MathModel {
         this.status_hashmap = status_hashmap;
     }
 
-    public int getTotal_questions() {
+    public int getTotalQuestionsNb() {
         return total_questions;
     }
 
