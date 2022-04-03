@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -23,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/mathBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Math"
