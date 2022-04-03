@@ -2,6 +2,7 @@ package com.example.lousticsschool;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     private AppDb db;
     private RecyclerViewAdapter adapter;
-    private RecyclerView recyclerview;
+    private RecyclerView recyclerView;
+    private ArrayList<User> usersList = new ArrayList<>();
+
+    private Button CreateAccountButton;
+    private Button GuestButton;
 
 
     @Override
@@ -28,27 +33,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerview = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         db = AppDb.getInstance(getApplicationContext());
 
-        ArrayList<User> users = new ArrayList<User>();
+        adapter = new RecyclerViewAdapter(this, usersList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
-        for (int i = 0; i < 10; i++) {
-            User user = new User();
-            user.setName("User " + i);
-            users.add(user);
-        }
+        CreateAccountButton = findViewById(R.id.CreateAccountButton);
+        GuestButton = findViewById(R.id.GuestButton);
 
-        adapter = new RecyclerViewAdapter(this, users);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview.setAdapter(adapter);
+        CreateAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
+        });
 
 
-        Button btn = findViewById(R.id.Btn);
-        btn.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-            intent.putExtras(MathModel.getFirstBundle(10));
+        GuestButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
             startActivity(intent);
         });
     }
@@ -64,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void getTasks() {
+    private void getUsers() {
         ///////////////////////
         // Classe asynchrone permettant de récupérer des taches et de mettre à jour le listView de l'activité
-        class GetTasks extends AsyncTask<Void, Void, List<User>> {
+        class GetUsers extends AsyncTask<Void, Void, List<User>> {
 
             @Override
             protected List<User> doInBackground(Void... voids) {
@@ -77,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<User> users) {
                 super.onPostExecute(users);
+                if (users == null) {
+                    usersList = new ArrayList<>();
+                }
+                usersList = (ArrayList<User>) users;
                 adapter.notifyDataSetChanged();
 
 
@@ -86,14 +95,14 @@ public class MainActivity extends AppCompatActivity {
         //////////////////////////
         // IMPORTANT bien penser à executer la demande asynchrone
         // Création d'un objet de type GetTasks et execution de la demande asynchrone
-        GetTasks gt = new GetTasks();
-        gt.execute();
+        GetUsers gu = new GetUsers();
+        gu.execute();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        getTasks();
+        getUsers();
     }
 
 }
