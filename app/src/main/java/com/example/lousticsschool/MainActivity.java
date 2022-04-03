@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn = findViewById(R.id.mathBtn);
+        Button btn = findViewById(R.id.Btn);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
             intent.putExtras(MathModel.getFirstBundle(2));

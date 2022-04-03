@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LousticsSchool">
         <activity
+            android:name=".MathPickerActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoggedActivity"
             android:exported="false" />
         <activity
