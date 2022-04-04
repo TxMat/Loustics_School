@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     usersList = new ArrayList<>();
                 }
                 usersList = (ArrayList<User>) users;
-                adapter.notifyDataSetChanged();
+                adapter.updateData(usersList);
 
 
             }
