@@ -48,8 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void updateData(ArrayList<User> usersList) {
-        mData.clear();
-        mData.addAll(usersList);
+        mData = usersList;
         notifyDataSetChanged();
     }
 
