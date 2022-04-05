@@ -10,10 +10,11 @@ import android.widget.Toast;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
+import com.example.lousticsschool.db.UserDao;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private AppDb db;
+    private final AppDb db = AppDb.getInstance(this);
 
     private Button Sumbit;
     private EditText etName;
@@ -55,6 +56,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 // creating a task
                 User usr = new User();
                 usr.setName(sName);
+
+                UserDao tmp = db.userDao();
 
                 // adding to database
                 long id = db.userDao().insert(usr);

@@ -5,19 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-<!--    <TextView
+    <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>-->
-
-    <Button
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:padding="20sp"
-        android:layout_weight="1"
-        style="?android:attr/buttonBarButtonStyle"
-        android:textColor="#c6c6c6"/>
+        android:textSize="20sp"/>
 
 </LinearLayout>

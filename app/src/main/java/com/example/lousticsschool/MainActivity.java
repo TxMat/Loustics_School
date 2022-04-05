@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.lousticsschool.db.AppDb;
@@ -17,7 +18,7 @@ import com.example.lousticsschool.db.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
 
     private AppDb db;
     private RecyclerViewAdapter adapter;
@@ -40,8 +41,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(this, usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        adapter.setClickListener(this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+
 
         CreateAccountButton = findViewById(R.id.CreateAccountButton);
         GuestButton = findViewById(R.id.GuestButton);
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     usersList = new ArrayList<>();
                 }
                 usersList = (ArrayList<User>) users;
-                adapter.notifyDataSetChanged();
+                adapter.updateData(usersList);
 
 
             }
@@ -105,4 +109,13 @@ public class MainActivity extends AppCompatActivity {
         getUsers();
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(MainActivity.this, LoggedActivity.class);
+        Bundle bundle = new Bundle();
+        // pass the user object to the next activity
+        bundle.putSerializable("user", usersList.get(position));
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 }

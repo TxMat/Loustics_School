@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.lousticsschool.db.AppDb;
+import com.example.lousticsschool.db.User;
 
 public class LoggedActivity extends AppCompatActivity {
 
     private AppDb db;
+
+    private User current_user;
 
     private Button Math;
     private Button CG;
