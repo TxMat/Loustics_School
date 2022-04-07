@@ -58,7 +58,8 @@ public class MathPickerActivity extends AppCompatActivity {
 
         RandomButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MathActivity.class);
-            intent.putExtras(MathModel.getFirstBundle(10));
+            intent.putExtra("operator_list", "+-x/");
+            intent.putExtra("init", "true");
             startActivity(intent);
         });
 

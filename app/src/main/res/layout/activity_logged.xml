@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -35,15 +36,15 @@
 
         <TextView
             android:id="@+id/QANumber"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="NB Questions repondues"
+            android:text="NB Questions  ef ef efefefe ef efrepondues"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/PercentageCorrect"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="casual"

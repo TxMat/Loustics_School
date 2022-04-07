@@ -57,7 +57,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
         GuestButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoggedActivity.class);
+            Bundle bundle = new Bundle();
+            // create a guest user
+            User guest = new User();
+            guest.setName("Invité");
+            guest.setTotalQuestionsAnswered(0);
+            guest.setTotalQuestionsCorrect(0);
+            guest.setId(-1);
+            bundle.putSerializable("user", guest);
+            intent.putExtras(bundle);
             startActivity(intent);
         });
     }

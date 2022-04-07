@@ -26,12 +26,17 @@ public class MathActivity extends AppCompatActivity {
     private TextView QuestionNumber;
     private MathModel mathModel;
 
+    private String operator_list;
+
+    //private HashMap<Integer, String> status_hashmap;
+
 
 
     @Override
     public void onBackPressed() {
         if (mathModel.getCurrentQuestionNb() != 1) {
             super.onBackPressed();
+            mathModel.setQuestion_nb(mathModel.getCurrentQuestionNb() - 1);
             overridePendingTransition(R.anim.no_transition, R.anim.slide_out_right);
         }
     }
@@ -41,7 +46,15 @@ public class MathActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math);
 
-        mathModel = new MathModel(getIntent().getExtras());
+        operator_list = getIntent().getStringExtra("operator_list");
+
+        if (getIntent().getExtras().get("init") != null) {
+            mathModel = new MathModel(10, operator_list);
+        } else {
+            mathModel = (MathModel) getIntent().getSerializableExtra("mathModel");
+        }
+
+
 
         Calc = findViewById(R.id.MathTextView);
         Answer = findViewById(R.id.Answer);
@@ -63,7 +76,7 @@ public class MathActivity extends AppCompatActivity {
         }
 
 
-        Calc.setText(mathModel.getCalcString());
+        Calc.setText(mathModel.getCurrentQuestionString() + " = ");
 
         String QuestionNumberString = "Question " + mathModel.getCurrentQuestionNb() + "/" + mathModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
@@ -117,7 +130,7 @@ public class MathActivity extends AppCompatActivity {
                     // if the user has answered all the questions fininsh the activity and clear the activity stack
                     if (mathModel.isLastQuestion()) {
                         Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                        intent.putExtra("STATUS_HASHMAP", mathModel.getStatus_hashmap());
+                        intent.putExtra("STATUS_HASHMAP", mathModel.getCalcul_hashmap());
                         intent.putExtra("TOTAL_QUESTIONS", mathModel.getTotalQuestionsNb());
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
