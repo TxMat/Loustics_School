@@ -38,7 +38,6 @@ public class MathPickerActivity extends AppCompatActivity {
         RandomButton = findViewById(R.id.RandomButton);
         AdvancedButton = findViewById(R.id.AdvancedOptionsButton);
         LogoutButton = findViewById(R.id.LogoutButton);
-        QuitButton = findViewById(R.id.QuitButton);
 
         AdditionButton.setOnClickListener(v -> {
             return;
@@ -68,16 +67,7 @@ public class MathPickerActivity extends AppCompatActivity {
         });
 
         LogoutButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Logout")
-                    .setMessage("Voulez vous vraiment vous déconnecter ?")
-                    .setPositiveButton("Oui", (dialog, which) -> {
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                    )
-                    .setNegativeButton("Non", null)
-                    .show();
+
 
 
         });

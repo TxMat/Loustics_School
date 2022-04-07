@@ -1,10 +1,6 @@
 package com.example.lousticsschool;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,11 +10,8 @@ import com.example.lousticsschool.db.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-public class LoggedActivity extends AppCompatActivity {
+public class LoggedActivity extends LogoutMethods {
 
     private AppDb db;
 
@@ -39,9 +32,7 @@ public class LoggedActivity extends AppCompatActivity {
 
     private Button Math;
     private Button CG;
-
     private Button Logout;
-    private Button Quit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +70,9 @@ public class LoggedActivity extends AppCompatActivity {
 
         Math = findViewById(R.id.mathsButton);
         CG = findViewById(R.id.CultureGButton);
-
         Logout = findViewById(R.id.LogoutButton);
-        Quit = findViewById(R.id.QuitButton);
+
+        Logout.setOnClickListener(v -> LogoutMethods.Logout(this));
 
         Math.setOnClickListener(v -> {
             Intent intent = new Intent(LoggedActivity.this, MathPickerActivity.class);
