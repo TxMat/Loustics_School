@@ -66,11 +66,7 @@ public class MathPickerActivity extends AppCompatActivity {
             return;
         });
 
-        LogoutButton.setOnClickListener(v -> {
-
-
-
-        });
+        LogoutButton.setOnClickListener(v -> LogoutMethods.Logout(this));
 
 
     }

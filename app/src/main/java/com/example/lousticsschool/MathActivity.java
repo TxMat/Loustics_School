@@ -28,9 +28,6 @@ public class MathActivity extends AppCompatActivity {
 
     private String operator_list;
 
-    //private HashMap<Integer, String> status_hashmap;
-
-
 
     @Override
     public void onBackPressed() {
@@ -109,7 +106,7 @@ public class MathActivity extends AppCompatActivity {
     }
 
     private boolean CheckResult(String answer) {
-        if (!mathModel.isAnswered()){
+        if (Answer.isEnabled()) {
             try {
                 if (mathModel.IsCorrect(answer)) {
                     Answer.setTextColor(Color.GREEN);
@@ -160,7 +157,7 @@ public class MathActivity extends AppCompatActivity {
         } else {
             // go to perviouly exited activity
             Intent intent = new Intent(getApplicationContext(), MathActivity.class);
-            intent.putExtras(mathModel.getNextBundle());
+            intent.putExtras(mathModel.getBundle());
 
             // add a slide animation when starting the next activity
             startActivity(intent);

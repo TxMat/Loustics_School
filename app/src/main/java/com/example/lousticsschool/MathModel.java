@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class MathModel implements Serializable {
     private int question_nb;
     private HashMap<Integer, String> calcul_hashmap;
+    private HashMap<Integer, Integer> user_answers;
     private int total_questions;
     private boolean is_answered;
     private int result;
@@ -17,7 +18,8 @@ public class MathModel implements Serializable {
         // fill the hashmap with the operations with random operators
         this.total_questions = total_questions;
         this.question_nb = 1;
-        calcul_hashmap = new HashMap<>();
+        this.user_answers = new HashMap<>();
+        this.calcul_hashmap = new HashMap<>();
         for (int i = 0; i < total_questions; i++) {
             Bundle bundle = RandomizeCalc(2,100,operator_list);
             // check if the calculation is not already in the hashmap if it is, generate a new one
@@ -56,7 +58,7 @@ public class MathModel implements Serializable {
         this.total_questions = total_questions;
     }
 
-    public boolean isAnswered() {
+    public boolean isAnswered(int currentQuestionNb) {
         return is_answered;
     }
 
@@ -77,8 +79,7 @@ public class MathModel implements Serializable {
         if (answer.length() == 0 || answer.equals("-")) {
             throw new IllegalArgumentException("Answer cannot be empty");
         }
-        boolean isCorrect = Integer.parseInt(answer) == result;
-        return isCorrect;
+        return Integer.parseInt(answer) == result;
     }
 
     public boolean isLastQuestion() {
@@ -120,5 +121,18 @@ public class MathModel implements Serializable {
         question_nb++;
         bundle.putSerializable("mathModel", this);
         return bundle;
+    }
+
+    public Bundle getBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mathModel", this);
+        return bundle;
+    }
+
+    public void test() {
+        question_nb--;
+        for (int i = 0; i < calcul_hashmap.size(); i++) {
+            System.out.println(calcul_hashmap.get(i));
+        }
     }
 }
