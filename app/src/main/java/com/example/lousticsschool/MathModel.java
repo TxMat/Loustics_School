@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MathModel implements Serializable {
     private int question_nb;
@@ -134,5 +135,16 @@ public class MathModel implements Serializable {
         for (int i = 0; i < calcul_hashmap.size(); i++) {
             System.out.println(calcul_hashmap.get(i));
         }
+    }
+
+    public void setCurrentAnswer(String answer) {
+        user_answers.put(question_nb, Integer.valueOf(answer));
+    }
+
+    public String getCurrentQuestionAnswer() {
+        if (user_answers.containsKey(question_nb)) {
+            return String.valueOf(user_answers.get(question_nb));
+        }
+        return null;
     }
 }

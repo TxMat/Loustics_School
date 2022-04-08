@@ -74,6 +74,11 @@ public class MathActivity extends AppCompatActivity {
 
 
         Calc.setText(mathModel.getCurrentQuestionString() + " = ");
+        // if question already answered, display the answer
+        if (mathModel.getCurrentQuestionAnswer() != null) {
+            Answer.setText(mathModel.getCurrentQuestionAnswer());
+            Answer.setEnabled(false);
+        }
 
         String QuestionNumberString = "Question " + mathModel.getCurrentQuestionNb() + "/" + mathModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
@@ -121,6 +126,7 @@ public class MathActivity extends AppCompatActivity {
                 Previous.setEnabled(false);
                 Answer.setEnabled(false);
                 Quit.setEnabled(false);
+                mathModel.setCurrentAnswer(answer);
                 // wait for 1 second
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
