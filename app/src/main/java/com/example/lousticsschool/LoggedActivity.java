@@ -11,7 +11,7 @@ import com.example.lousticsschool.db.User;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class LoggedActivity extends LogoutMethods {
+public class LoggedActivity extends UtilsMethods {
 
     private AppDb db;
 
@@ -72,7 +72,7 @@ public class LoggedActivity extends LogoutMethods {
         CG = findViewById(R.id.CultureGButton);
         Logout = findViewById(R.id.LogoutButton);
 
-        Logout.setOnClickListener(v -> LogoutMethods.Logout(this));
+        Logout.setOnClickListener(v -> UtilsMethods.Logout(this));
 
         Math.setOnClickListener(v -> {
             Intent intent = new Intent(LoggedActivity.this, MathPickerActivity.class);

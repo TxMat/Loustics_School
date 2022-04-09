@@ -54,22 +54,8 @@ public class MathModel implements Serializable {
     }
 
     private int getCurrentAnswer() {
-        String[] calc = calcul_array.get(question_nb - 1).split(" ");
-        // determine the operator
-        String operator = calc[1];
-        int first_number = Integer.parseInt(calc[0]);
-        int second_number = Integer.parseInt(calc[2]);
-        switch (operator) {
-            case "+":
-                return first_number + second_number;
-            case "-":
-                return first_number - second_number;
-            case "x":
-                return first_number * second_number;
-            case "/":
-                return first_number / second_number;
-        }
-        return 0;
+        return UtilsMethods.calculateFromString(calcul_array.get(question_nb - 1));
+
     }
 
     public boolean isLastQuestion() {

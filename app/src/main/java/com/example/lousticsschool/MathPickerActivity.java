@@ -2,8 +2,6 @@ package com.example.lousticsschool;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -64,7 +62,7 @@ public class MathPickerActivity extends AppCompatActivity {
             return;
         });
 
-        LogoutButton.setOnClickListener(v -> LogoutMethods.Logout(this));
+        LogoutButton.setOnClickListener(v -> UtilsMethods.Logout(this));
 
 
     }

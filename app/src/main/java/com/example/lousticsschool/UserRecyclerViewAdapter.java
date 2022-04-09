@@ -76,7 +76,7 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.tvName);
+            myTextView = itemView.findViewById(R.id.tvResult);
             itemView.setOnClickListener(this);
         }
 

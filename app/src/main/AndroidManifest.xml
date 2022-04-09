@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LousticsSchool">
         <activity
-            android:name=".LogoutMethods"
+            android:name=".UtilsMethods"
             android:exported="false" />
         <activity
             android:name=".CreateAccountActivity"

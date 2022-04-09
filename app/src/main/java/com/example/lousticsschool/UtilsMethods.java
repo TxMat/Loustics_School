@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LogoutMethods extends AppCompatActivity {
+public class UtilsMethods extends AppCompatActivity {
 
     // ask user if they want to logout
     public static void Logout(AppCompatActivity activity) {
@@ -22,12 +22,29 @@ public class LogoutMethods extends AppCompatActivity {
                 .show();
     }
 
-    /*public static void Quit(AppCompatActivity activity) {
-        new android.app.AlertDialog.Builder(activity)
-                .setTitle("Quit")
-                .setMessage("Are you sure you want to quit?")
-                .setPositiveButton("Yes", (dialog, which) -> activity.finish())
-                .setNegativeButton("No", null)
-                .show();
-    }*/
+
+    public static int calculateFromString(String s) {
+        // split string by space
+        String[] calc = s.split(" ");
+        // determine the operator
+        String operator = calc[1];
+        // get the numbers
+        int num1 = Integer.parseInt(calc[0]);
+        int num2 = Integer.parseInt(calc[2]);
+        // perform the calculation
+        switch (operator) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "x":
+                return num1 * num2;
+            case "/":
+                return num1 / num2;
+            default:
+                return 0;
+        }
+
+    }
+
 }
