@@ -95,9 +95,10 @@ public class MathActivity extends AppCompatActivity {
             builder.setTitle("Abandonner");
             builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
             builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
-                Intent intent = new Intent(getApplicationContext(), MathPickerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
                 //clear all the activity stack
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("user", current_user);
                 startActivity(intent);
                 finish();
             }

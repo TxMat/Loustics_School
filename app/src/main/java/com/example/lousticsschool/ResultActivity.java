@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,11 @@ public class ResultActivity extends AppCompatActivity  {
     private ResultRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     private ArrayList<String> recapList = new ArrayList<>();
-    private ArrayList<Boolean> isCorrectArray = new ArrayList<>();
+    private final ArrayList<Boolean> isCorrectArray = new ArrayList<>();
+
+    private TextView tvScore;
+    private TextView tvTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class ResultActivity extends AppCompatActivity  {
         recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
 
         String exerciceType = getIntent().getStringExtra("EXERCICE_TYPE");
+
+        tvScore = findViewById(R.id.tvScore);
+        tvTitle = findViewById(R.id.tvTitle);
+
+
 
         // initialize isCorrect array by comparing the user's answer with the correct answer
         switch (exerciceType) {
@@ -46,6 +56,29 @@ public class ResultActivity extends AppCompatActivity  {
                     }
                 }
                 break;
+        }
+
+        // tv score is the number of true values in isCorrectArray
+        int score = 0;
+        for (int i = 0; i < isCorrectArray.size(); i++) {
+            if (isCorrectArray.get(i)) {
+                score++;
+            }
+        }
+
+        tvScore.setText("[ " + score + " / " + isCorrectArray.size() + " ]");
+
+        if (score < isCorrectArray.size() / 2) {
+            tvTitle.setText(R.string.try_again);
+        }
+        else if (score < isCorrectArray.size() * 3 / 4) {
+            tvTitle.setText(R.string.almost_there);
+        }
+        else if (score > isCorrectArray.size() * 3 / 4 && score < isCorrectArray.size()) {
+            tvTitle.setText(R.string.almost_perfect);
+        }
+        else if (score == isCorrectArray.size()) {
+            tvTitle.setText(R.string.perfect);
         }
 
         recyclerView = findViewById(R.id.rvAnswers);

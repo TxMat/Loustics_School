@@ -25,7 +25,7 @@ public class MathPickerActivity extends AppCompatActivity {
     private Button AdvancedButton;
 
     private Button LogoutButton;
-    private Button QuitButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,7 @@ public class MathPickerActivity extends AppCompatActivity {
         intent.putExtra("user", current_user);
         intent.putExtra("init", "true");
         startActivity(intent);
+        finish();
     }
 
 }

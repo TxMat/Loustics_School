@@ -55,7 +55,7 @@ public class LoggedActivity extends UtilsMethods {
         Greetings.setText("Bonjour " + current_user.getName());
         // with the total number of questions and the number of correct answers calculate the percentage of correct answers
         String percentage;
-        if (current_user.getTotalQuestionsCorrect() != 0) {
+        if (current_user.getTotalQuestionsAnswered() != 0) {
             percentage = String.valueOf(current_user.getTotalQuestionsCorrect() * 100 / current_user.getTotalQuestionsAnswered());
         } else {
             percentage = "--";
