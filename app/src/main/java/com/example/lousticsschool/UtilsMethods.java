@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UtilsMethods extends AppCompatActivity {
 
     // ask user if they want to logout

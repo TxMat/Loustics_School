@@ -76,6 +76,7 @@ public class LoggedActivity extends UtilsMethods {
 
         Math.setOnClickListener(v -> {
             Intent intent = new Intent(LoggedActivity.this, MathPickerActivity.class);
+            intent.putExtra("user", current_user);
             startActivity(intent);
         });
 

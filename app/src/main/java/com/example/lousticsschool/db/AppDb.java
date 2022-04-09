@@ -39,7 +39,7 @@ public abstract class AppDb extends RoomDatabase {
         context = context.getApplicationContext();
 
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+            INSTANCE = Room.databaseBuilder(context,
                     AppDb.class, "LSSDatabase")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
@@ -48,7 +48,7 @@ public abstract class AppDb extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
+    private static final RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);

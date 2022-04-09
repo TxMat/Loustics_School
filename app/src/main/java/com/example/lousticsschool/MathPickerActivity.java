@@ -8,12 +8,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lousticsschool.db.AppDb;
+import com.example.lousticsschool.db.User;
 
 import java.util.ArrayList;
 
 public class MathPickerActivity extends AppCompatActivity {
 
     private AppDb db;
+    private User current_user;
 
     private Button AdditionButton;
     private Button SubtractButton;
@@ -31,6 +33,7 @@ public class MathPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_math_picker);
 
         db = AppDb.getInstance(this);
+        current_user = (User) getIntent().getSerializableExtra("user");
 
         AdditionButton = findViewById(R.id.AdditionsButton);
         SubtractButton = findViewById(R.id.SoustractionsButton);
@@ -82,6 +85,7 @@ public class MathPickerActivity extends AppCompatActivity {
     private void StartExercise(String operator) {
         Intent intent = new Intent(this, MathActivity.class);
         intent.putExtra("operator_list", operator);
+        intent.putExtra("user", current_user);
         intent.putExtra("init", "true");
         startActivity(intent);
     }

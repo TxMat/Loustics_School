@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.AnimationUtils;
@@ -14,7 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lousticsschool.db.AppDb;
+import com.example.lousticsschool.db.User;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MathActivity extends AppCompatActivity {
 
@@ -29,6 +34,7 @@ public class MathActivity extends AppCompatActivity {
     private MathModel mathModel;
 
     private String operator_list;
+    private User current_user;
 
 
     @Override
@@ -40,6 +46,9 @@ public class MathActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math);
+
+        // get the current user
+        current_user = (User) getIntent().getSerializableExtra("user");
 
         operator_list = getIntent().getStringExtra("operator_list");
 
@@ -108,6 +117,9 @@ public class MathActivity extends AppCompatActivity {
                 if (mathModel.IsCorrect(answer)) {
                     Answer.setTextColor(Color.GREEN);
                     Calc.setTextColor(Color.GREEN);
+                    // increment user correct answers
+                    current_user.setTotalQuestionsCorrect(current_user.getTotalQuestionsCorrect() + 1);
+
                 } else {
                     // set the text to red if the user has entered the wrong answer and display the correct answer
                     Answer.setTextColor(Color.RED);
@@ -119,6 +131,9 @@ public class MathActivity extends AppCompatActivity {
                 Answer.setEnabled(false);
                 Quit.setEnabled(false);
                 mathModel.setCurrentAnswer(answer);
+                // increment user total questions answered
+                current_user.setTotalQuestionsAnswered(current_user.getTotalQuestionsAnswered() + 1);
+                updateUser();
                 // wait for 1 second
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
@@ -139,6 +154,7 @@ public class MathActivity extends AppCompatActivity {
                         // if the user has not answered all the questions, go to the next question
                         Intent intent = new Intent(getApplicationContext(), MathActivity.class);
                         intent.putExtras(mathModel.getNextBundle());
+                        intent.putExtra("user", current_user);
                         // add a slide animation when starting the next activity
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
@@ -167,6 +183,27 @@ public class MathActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
             return true;
         }
+    }
+
+    // Async class update user int the database
+    private void updateUser() {
+        ///////////////////////
+        // Classe asynchrone permettant de récupérer des taches et de mettre à jour le listView de l'activité
+        class UpdateUser extends AsyncTask<Void, Void, Void> {
+
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                AppDb.getInstance(getApplicationContext()).userDao().update(current_user);
+                return null;
+            }
+        }
+
+        //////////////////////////
+        // IMPORTANT bien penser à executer la demande asynchrone
+        // Création d'un objet de type GetTasks et execution de la demande asynchrone
+        UpdateUser gu = new UpdateUser();
+        gu.execute();
     }
 
 

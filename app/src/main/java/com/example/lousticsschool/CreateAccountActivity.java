@@ -14,7 +14,7 @@ import com.example.lousticsschool.db.UserDao;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private final AppDb db = AppDb.getInstance(this);
+    private AppDb db;
 
     private Button Sumbit;
     private EditText etName;
@@ -22,6 +22,9 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = AppDb.getInstance(getApplicationContext());
+
         setContentView(R.layout.activity_create_account);
 
         Sumbit = findViewById(R.id.AddUserButton);
