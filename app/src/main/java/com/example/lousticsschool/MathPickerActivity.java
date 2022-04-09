@@ -40,29 +40,27 @@ public class MathPickerActivity extends AppCompatActivity {
         LogoutButton = findViewById(R.id.LogoutButton);
 
         AdditionButton.setOnClickListener(v -> {
-            return;
+            StartExercise("+");
         });
 
         SubtractButton.setOnClickListener(v -> {
-            return;
+            StartExercise("-");
         });
 
         MultiplyButton.setOnClickListener(v -> {
-            return;
+            StartExercise("x");
         });
 
         DivideButton.setOnClickListener(v -> {
-            return;
+            StartExercise("/");
         });
 
         RandomButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MathActivity.class);
-            intent.putExtra("operator_list", "+-x/");
-            intent.putExtra("init", "true");
-            startActivity(intent);
+            StartExercise("+-x/");
         });
 
         AdvancedButton.setOnClickListener(v -> {
+            // next version
             return;
         });
 
@@ -70,4 +68,12 @@ public class MathPickerActivity extends AppCompatActivity {
 
 
     }
+
+    private void StartExercise(String operator) {
+        Intent intent = new Intent(this, MathActivity.class);
+        intent.putExtra("operator_list", operator);
+        intent.putExtra("init", "true");
+        startActivity(intent);
+    }
+
 }

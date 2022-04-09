@@ -1,19 +1,16 @@
 package com.example.lousticsschool;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lousticsschool.db.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerwiew_row, parent, false);
+        View view = mInflater.inflate(R.layout.user_row, parent, false);
         return new ViewHolder(view);
     }
 

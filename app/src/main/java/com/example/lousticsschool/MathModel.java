@@ -2,32 +2,31 @@ package com.example.lousticsschool;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class MathModel implements Serializable {
     private int question_nb;
-    private HashMap<Integer, String> calcul_hashmap;
-    private HashMap<Integer, Integer> user_answers;
+    private ArrayList<String> calcul_array;
+    private ArrayList<Integer> user_answers;
     private int total_questions;
-    private boolean is_answered;
-    private int result;
     private String CalcString;
 
     public MathModel(int total_questions, String operator_list) {
         // fill the hashmap with the operations with random operators
         this.total_questions = total_questions;
         this.question_nb = 1;
-        this.user_answers = new HashMap<>();
-        this.calcul_hashmap = new HashMap<>();
+        this.user_answers = new ArrayList<>();
+        this.calcul_array = new ArrayList<>();
         for (int i = 0; i < total_questions; i++) {
             Bundle bundle = RandomizeCalc(2,100,operator_list);
-            // check if the calculation is not already in the hashmap if it is, generate a new one
-            while (calcul_hashmap.containsValue(bundle.getString("FIRST_NUMBER") + bundle.getString("OPERATOR") + bundle.getString("SECOND_NUMBER"))) {
+            // check if the calculation is not already in the arraylist if it is, generate a new one
+            while (calcul_array.contains(bundle.getString("FIRST_NUMBER") + bundle.getString("OPERATOR") + bundle.getString("SECOND_NUMBER"))) {
                 bundle = RandomizeCalc(2,100,operator_list);
             }
-            calcul_hashmap.put(i, bundle.getInt("FIRST_NUMBER") + " " + bundle.getString("OPERATOR") + " " + bundle.getInt("SECOND_NUMBER"));
+            calcul_array.add(bundle.getInt("FIRST_NUMBER") + " " + bundle.getString("OPERATOR") + " " + bundle.getInt("SECOND_NUMBER"));
         }
     }
 
@@ -36,51 +35,41 @@ public class MathModel implements Serializable {
     }
 
     public String getCurrentQuestionString() {
-        return calcul_hashmap.get(question_nb - 1);
+        return calcul_array.get(question_nb - 1);
     }
 
-    public void setQuestion_nb(int question_nb) {
-        this.question_nb = question_nb;
-    }
-
-    public HashMap<Integer, String> getCalcul_hashmap() {
-        return calcul_hashmap;
-    }
-
-    public void setCalcul_hashmap(HashMap<Integer, String> calcul_hashmap) {
-        this.calcul_hashmap = calcul_hashmap;
+    public ArrayList<String> GetCalculArray() {
+        return calcul_array;
     }
 
     public int getTotalQuestionsNb() {
         return total_questions;
     }
 
-    public void setTotal_questions(int total_questions) {
-        this.total_questions = total_questions;
-    }
-
-    public boolean isAnswered(int currentQuestionNb) {
-        return is_answered;
-    }
-
-    public void setIs_answered(boolean is_answered) {
-        this.is_answered = is_answered;
-    }
-
-    public int getResult() {
-        return result;
-    }
-
-    public void setResult(int result) {
-        this.result = result;
-    }
-
     public Boolean IsCorrect(String answer) {
-        // set the text to green if the user has entered the correct answer
         if (answer.length() == 0 || answer.equals("-")) {
             throw new IllegalArgumentException("Answer cannot be empty");
         }
-        return Integer.parseInt(answer) == result;
+        return Integer.parseInt(answer) == getCurrentAnswer();
+    }
+
+    private int getCurrentAnswer() {
+        String[] calc = calcul_array.get(question_nb - 1).split(" ");
+        // determine the operator
+        String operator = calc[1];
+        int first_number = Integer.parseInt(calc[0]);
+        int second_number = Integer.parseInt(calc[2]);
+        switch (operator) {
+            case "+":
+                return first_number + second_number;
+            case "-":
+                return first_number - second_number;
+            case "x":
+                return first_number * second_number;
+            case "/":
+                return first_number / second_number;
+        }
+        return 0;
     }
 
     public boolean isLastQuestion() {
@@ -93,9 +82,10 @@ public class MathModel implements Serializable {
     }
 
 
-    public static Bundle RandomizeCalc(int min, int max, String operator_list) {
+    @NonNull
+    public static Bundle RandomizeCalc(int min, int max, @NonNull String operator_list) {
         Bundle bundle = new Bundle();
-        String operator = operator_list.charAt((int) (Math.random() * 4)) + "";
+        String operator = operator_list.charAt((int) (Math.random() * operator_list.length())) + "";
         int randomSecondNumber;
         int randomFirstNumber;
         if (operator.equals("x")) {
@@ -130,21 +120,11 @@ public class MathModel implements Serializable {
         return bundle;
     }
 
-    public void test() {
-        question_nb--;
-        for (int i = 0; i < calcul_hashmap.size(); i++) {
-            System.out.println(calcul_hashmap.get(i));
-        }
-    }
-
     public void setCurrentAnswer(String answer) {
-        user_answers.put(question_nb, Integer.valueOf(answer));
+        user_answers.add(Integer.valueOf(answer));
     }
 
-    public String getCurrentQuestionAnswer() {
-        if (user_answers.containsKey(question_nb)) {
-            return String.valueOf(user_answers.get(question_nb));
-        }
-        return null;
+    public ArrayList<Integer> GetAnswerArray() {
+        return user_answers;
     }
 }

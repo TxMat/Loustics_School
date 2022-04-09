@@ -31,11 +31,7 @@ public class MathActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mathModel.getCurrentQuestionNb() != 1) {
-            super.onBackPressed();
-            mathModel.setQuestion_nb(mathModel.getCurrentQuestionNb() - 1);
-            overridePendingTransition(R.anim.no_transition, R.anim.slide_out_right);
-        }
+        // disable back button to prevent accidental exit or cheating
     }
 
     @Override
@@ -59,7 +55,6 @@ public class MathActivity extends AppCompatActivity {
         QALayout = findViewById(R.id.QALayout);
         QuestionNumber = findViewById(R.id.QuestionNumber);
         Next = findViewById(R.id.next);
-        Previous = findViewById(R.id.Previous);
         Quit = findViewById(R.id.Quit);
 
         Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
@@ -74,11 +69,6 @@ public class MathActivity extends AppCompatActivity {
 
 
         Calc.setText(mathModel.getCurrentQuestionString() + " = ");
-        // if question already answered, display the answer
-        if (mathModel.getCurrentQuestionAnswer() != null) {
-            Answer.setText(mathModel.getCurrentQuestionAnswer());
-            Answer.setEnabled(false);
-        }
 
         String QuestionNumberString = "Question " + mathModel.getCurrentQuestionNb() + "/" + mathModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
@@ -94,7 +84,7 @@ public class MathActivity extends AppCompatActivity {
             builder.setTitle("Abandonner");
             builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
             builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MathPickerActivity.class);
                 //clear all the activity stack
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -133,14 +123,13 @@ public class MathActivity extends AppCompatActivity {
                     // if the user has answered all the questions fininsh the activity and clear the activity stack
                     if (mathModel.isLastQuestion()) {
                         Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                        intent.putExtra("STATUS_HASHMAP", mathModel.getCalcul_hashmap());
-                        intent.putExtra("TOTAL_QUESTIONS", mathModel.getTotalQuestionsNb());
+                        intent.putExtra("CALCUL_ARRAY", mathModel.GetCalculArray());
+                        intent.putExtra("ANSWER_ARRAY", mathModel.GetAnswerArray());
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                     } else {
                         // if the user has not answered all the questions, go to the next question
-                        mathModel.setIs_answered(true);
                         Intent intent = new Intent(getApplicationContext(), MathActivity.class);
                         intent.putExtras(mathModel.getNextBundle());
                         // add a slide animation when starting the next activity
@@ -149,6 +138,7 @@ public class MathActivity extends AppCompatActivity {
                         Next.setEnabled(true);
                         Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
                         Quit.setEnabled(true);
+                        finish();
                     }
 
                 }, 1000);
