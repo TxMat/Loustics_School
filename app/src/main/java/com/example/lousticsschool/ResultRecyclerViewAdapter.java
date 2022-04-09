@@ -23,6 +23,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private List<Boolean> isCorrectArray;
+    private List<Boolean> isCorrectedArray;
     private String exerciceType;
     private Context context;
 
@@ -33,6 +34,11 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
         this.isCorrectArray = isCorrectArray;
         this.context = context;
         this.exerciceType = exerciceType;
+        // init isCorrectedArray with false
+        isCorrectedArray = new ArrayList<>();
+        for (int i = 0; i < isCorrectArray.size(); i++) {
+            isCorrectedArray.add(false);
+        }
     }
 
     // inflates the row layout from xml when needed
@@ -48,8 +54,10 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String str = mData.get(position);
         holder.myTextView.setText(str);
-        if (isCorrectArray.get(position)) {
+        if (isCorrectArray.get(position) && !isCorrectedArray.get(position)) {
             holder.myTextView.setTextColor(Color.GREEN);
+        } else if (isCorrectArray.get(position) && isCorrectedArray.get(position)) {
+            holder.myTextView.setTextColor(Color.YELLOW);
         } else {
             holder.myTextView.setTextColor(Color.RED);
         }
@@ -97,8 +105,10 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                     split[0] = split[0].trim();
                     String correctAnswer = String.valueOf(calculateFromString(split[0]));
                     mData.set(getAdapterPosition(), split[0] + " = " + correctAnswer);
+                    // set the text color to yellow
                     isCorrectArray.set(getAdapterPosition(), true);
-                    notifyDataSetChanged();
+                    isCorrectedArray.set(getAdapterPosition(), true);
+                    notifyItemChanged(getAdapterPosition());
                 }
                 return true;
             });
