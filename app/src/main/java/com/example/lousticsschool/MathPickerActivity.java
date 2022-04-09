@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.lousticsschool.db.AppDb;
+
+import java.util.ArrayList;
 
 public class MathPickerActivity extends AppCompatActivity {
 
@@ -58,8 +61,17 @@ public class MathPickerActivity extends AppCompatActivity {
         });
 
         AdvancedButton.setOnClickListener(v -> {
-            // next version
-            return;
+            // show a toast
+            Toast.makeText(this, "Advanced options coming soon!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ResultActivity.class);
+            ArrayList<String> result = new ArrayList<>();
+            // filling the array for testing
+            for (int i = 0; i < 20; i++) {
+                result.add("10 + 65 = " + i);
+            }
+            intent.putExtra("RESULT_ARRAY", result);
+            intent.putExtra("EXERCICE_TYPE", "Math");
+            startActivity(intent);
         });
 
         LogoutButton.setOnClickListener(v -> UtilsMethods.Logout(this));

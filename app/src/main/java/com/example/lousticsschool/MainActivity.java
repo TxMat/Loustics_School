@@ -18,7 +18,7 @@ import com.example.lousticsschool.db.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements UserRecyclerViewAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private AppDb db;
     private UserRecyclerViewAdapter adapter;
@@ -41,15 +41,12 @@ public class MainActivity extends AppCompatActivity implements UserRecyclerViewA
         adapter = new UserRecyclerViewAdapter(this, usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        adapter.setClickListener(this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-
         CreateAccountButton = findViewById(R.id.CreateAccountButton);
         GuestButton = findViewById(R.id.GuestButton);
-
         CreateAccountButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
             startActivity(intent);
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements UserRecyclerViewA
 
     //ask for a confirmation when the user wants to exit the app using the back button
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setTitle("Lousics School")
                 .setMessage("Veux-tu vraiment quitter l'application?")
@@ -112,19 +109,11 @@ public class MainActivity extends AppCompatActivity implements UserRecyclerViewA
         gu.execute();
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
         getUsers();
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        Intent intent = new Intent(MainActivity.this, LoggedActivity.class);
-        Bundle bundle = new Bundle();
-        // pass the user object to the next activity
-        bundle.putSerializable("user", usersList.get(position));
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 }

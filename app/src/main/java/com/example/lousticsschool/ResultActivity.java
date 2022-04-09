@@ -13,7 +13,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class ResultActivity extends AppCompatActivity implements ResultRecyclerViewAdapter.ItemClickListener  {
+public class ResultActivity extends AppCompatActivity  {
 
     private ResultRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
@@ -52,7 +52,6 @@ public class ResultActivity extends AppCompatActivity implements ResultRecyclerV
         adapter = new ResultRecyclerViewAdapter(this, recapList, isCorrectArray, exerciceType);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        adapter.setClickListener(this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -62,9 +61,5 @@ public class ResultActivity extends AppCompatActivity implements ResultRecyclerV
 
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        // if the calcul is incorrect display a dialog with the correct answer
 
-    }
 }

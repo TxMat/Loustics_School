@@ -44,7 +44,7 @@ public class MathActivity extends AppCompatActivity {
         operator_list = getIntent().getStringExtra("operator_list");
 
         if (getIntent().getExtras().get("init") != null) {
-            mathModel = new MathModel(2, operator_list);
+            mathModel = new MathModel(10, operator_list);
         } else {
             mathModel = (MathModel) getIntent().getSerializableExtra("mathModel");
         }

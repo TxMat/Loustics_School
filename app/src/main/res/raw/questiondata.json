@@ -1,0 +1,368 @@
+{
+  "quizz": [
+    {
+      "id": 1,
+      "question": "Dans quel livre, souvent épais, trouve-t-on principalement des cartes de géographie ?",
+      "propositions": [
+        "Atlas",
+        "Dictionnaire",
+        "Agenda",
+        "Roman"
+      ],
+      "réponse": "Atlas",
+      "anecdote": "Les atlas mieux que les cartes fournissent une représentation des conceptions politiques d'une société ou d'une culture donnée."
+    },
+    {
+      "id": 2,
+      "question": "De quelle matière très dure est principalement constituée la banquise ?",
+      "propositions": [
+        "Métal",
+        "Terre",
+        "Roche",
+        "Glace"
+      ],
+      "réponse": "Glace",
+      "anecdote": "La banquise est la couche de glace qui se forme à la surface d'une étendue d'eau par solidification des premières couches d'eau."
+    },
+    {
+      "id": 3,
+      "question": "Dans quel endroit intérieur ou extérieur faut-il mettre un bonnet pour raison d'hygiène ?",
+      "propositions": [
+        "Piscine",
+        "Cinéma",
+        "Théâtre",
+        "Stade"
+      ],
+      "réponse": "Piscine",
+      "anecdote": "Les piscines publiques comportent en général un bassin de 25 mètres de longueur pour une largeur de 10 et 20 mètres."
+    },
+    {
+      "id": 4,
+      "question": "Quelle opération arithmétique permet de calculer le produit de deux nombres ?",
+      "propositions": [
+        "Simplification",
+        "Multiplication",
+        "Soustraction",
+        "Division"
+      ],
+      "réponse": "Multiplication",
+      "anecdote": "Cette opération est souvent notée avec la croix de multiplication, mais peut aussi être notée par d'autres symboles."
+    },
+    {
+      "id": 5,
+      "question": "Quel sport consiste à faire du ski sur l'eau, tracté par un bateau rapide ?",
+      "propositions": [
+        "Ski acrobatique",
+        "Ski de fond",
+        "Ski nautique",
+        "Ski alpin"
+      ],
+      "réponse": "Ski nautique",
+      "anecdote": "Ce sport consistant à se faire tracter par un bateau à moteur comporte 4 disciplines : le slalom, les figures, le saut et le combiné."
+    },
+    {
+      "id": 6,
+      "question": "Duquel de nos cinq sens les personnes aveugles sont-elles hélas privées ?",
+      "propositions": [
+        "Toucher",
+        "Ouïe",
+        "Odorat",
+        "Vue"
+      ],
+      "réponse": "Vue",
+      "anecdote": "La vie sociale est compliquée par le handicap : la santé et le sommeil sont affectés par une perturbation de la production de la mélatonine."
+    },
+    {
+      "id": 7,
+      "question": "Dans quel dessin animé peux-tu entendre la célèbre phrase « Hakuna matata » ?",
+      "propositions": [
+        "Dinosaure",
+        "Toy Story",
+        "Cars",
+        "Le Roi lion"
+      ],
+      "réponse": "Le Roi lion",
+      "anecdote": "Sorti en 1994, le film est inspiré de l'oeuvre d'Osamu Tezuka « Le Roi Léo » (1951) et d'« Hamlet » de William Shakespeare."
+    },
+    {
+      "id": 8,
+      "question": "Quel sport consiste à envoyer une petite balle blanche dans un trou ?",
+      "propositions": [
+        "Chistera",
+        "Croquet",
+        "Cricket",
+        "Golf"
+      ],
+      "réponse": "Golf",
+      "anecdote": "En 2009, Le Comité international olympique a réintégré le golf parmi la liste des sports présents aux Jeux olympiques d'été."
+    },
+    {
+      "id": 9,
+      "question": "Que porte sur la tête le capitaine Haddock, meilleur ami de Tintin ?",
+      "propositions": [
+        "Casquette",
+        "Casque",
+        "Chapeau",
+        "Turban"
+      ],
+      "réponse": "Casquette",
+      "anecdote": "En 1996, il a été désigné comme le personnage principal préféré de la série avec 37,5 % des suffrages devant Milou et Tintin."
+    },
+    {
+      "id": 10,
+      "question": "De quelle montagne peuvent parfois sortir des matières brûlantes ?",
+      "propositions": [
+        "Rocher",
+        "Volcan",
+        "Dune",
+        "Talus"
+      ],
+      "réponse": "Volcan",
+      "anecdote": "Les laves refroidies peuvent atteindre des milliers de mètres d'épaisseur, formant parfois des montagnes ou des îles."
+    }
+  ],
+  "confirmé": [
+    {
+      "id": 11,
+      "question": "Laquelle de ces propositions désigne ce qui apparaît en premier sur un arbre ?",
+      "propositions": [
+        "Fleur",
+        "Fruit",
+        "Bourgeon",
+        "Pépin"
+      ],
+      "réponse": "Bourgeon",
+      "anecdote": "Le bourgeon donne naissance aux branches, aux feuilles, aux fleurs (le bourgeon est alors nommé bouton) et aux fruits."
+    },
+    {
+      "id": 12,
+      "question": "Dans la coquille de quel animal marin peut-on parfois trouver une perle ?",
+      "propositions": [
+        "Huître",
+        "Tortue",
+        "Moule",
+        "Escargot"
+      ],
+      "réponse": "Huître",
+      "anecdote": "Les huîtres sont des mollusques qui ne vivent que dans l'eau salée ou saumâtre et se trouvent dans toutes les mers."
+    },
+    {
+      "id": 13,
+      "question": "Quel nom donne-t-on aux grandes collines de sable situées au bord de la mer ?",
+      "propositions": [
+        "Falaises",
+        "Dunes",
+        "Banquises",
+        "Monts"
+      ],
+      "réponse": "Dunes",
+      "anecdote": "Les dunes étant composées de sable, on ne parle pas de dune de sable, sauf pour préciser la qualité du sable qui la compose."
+    },
+    {
+      "id": 14,
+      "question": "Au cours de quelle saison la plupart des arbres fleurissent-ils en Europe ?",
+      "propositions": [
+        "Automne",
+        "Été",
+        "Hiver",
+        "Printemps"
+      ],
+      "réponse": "Printemps",
+      "anecdote": "Sur les arbres, le bourgeon hiverne et au printemps, lorsque les racines reprennent le pompage de la sève brute, celui-ci éclate."
+    },
+    {
+      "id": 15,
+      "question": "Comment appelle-t-on un jeune mouton mâle âgé de moins d'un an ?",
+      "propositions": [
+        "Bouc",
+        "Agneau",
+        "Biquette",
+        "Bélier"
+      ],
+      "réponse": "Agneau",
+      "anecdote": "L'agneau est principalement élevé pour sa viande, mais également pour sa peau (articles de mode) et son poil (feutre des chapeliers)."
+    },
+    {
+      "id": 16,
+      "question": "Quelle médaille obtient un sportif arrivé deuxième d'une épreuve aux JO ?",
+      "propositions": [
+        "Argent",
+        "Bronze",
+        "Or",
+        "Cuivre"
+      ],
+      "réponse": "Argent",
+      "anecdote": "Lors des JO de 1896, la médaille d'argent était remise au gagnant : ce n'est qu'en 1904 que l'ordre or/argent/bronze devint un standard."
+    },
+    {
+      "id": 17,
+      "question": "Quel appareil permet de rebondir sur une toile tendue et de faire des sauts et des figures ?",
+      "propositions": [
+        "Javelot",
+        "Perche",
+        "Espalier",
+        "Trampoline"
+      ],
+      "réponse": "Trampoline",
+      "anecdote": "Conjuguant l'aspect acrobatique à l'adrénaline des sensations verticales, le trampoline est considéré comme sport et attraction."
+    },
+    {
+      "id": 18,
+      "question": "Quel genre de chaussures porte-t-on pour pratiquer le judo en toute sécurité ?",
+      "propositions": [
+        "Aucune",
+        "Bottes",
+        "Baskets",
+        "Sabots"
+      ],
+      "réponse": "Aucune",
+      "anecdote": "Le lieu où l'on pratique le judo s'appelle le dojo, les pratiquants les judokas, la tenue en coton renforcée le judogi ou kimono."
+    },
+    {
+      "id": 19,
+      "question": "Combien un trèfle du jardin possède-t-il le plus souvent de feuilles ?",
+      "propositions": [
+        "Cinq",
+        "Quatre",
+        "Trois",
+        "Deux"
+      ],
+      "réponse": "Trois",
+      "anecdote": "C'est une plante très basse à tige rampante, reconnaissable à ses inflorescences blanches, parfois rosées, au parfum assez agréable."
+    },
+    {
+      "id": 20,
+      "question": "Dans un jeu de cartes classique, de quelle couleur sont les carreaux ?",
+      "propositions": [
+        "Bleu",
+        "Vert",
+        "Rouge",
+        "Noir"
+      ],
+      "réponse": "Rouge",
+      "anecdote": "Un jeu français comprend 52 cartes à jouer, réparties suivant treize valeurs sur quatre enseignes : pique, coeur, carreau et trèfle."
+    }
+  ],
+  "expert": [
+    {
+      "id": 21,
+      "question": "Comment appelle-t-on la ligne imaginaire qui sépare deux pays ?",
+      "propositions": [
+        "Tangente",
+        "Médiane",
+        "Frontière",
+        "Section"
+      ],
+      "réponse": "Frontière",
+      "anecdote": "Le sens attribué au mot frontière a évolué tout au long de l'histoire, et il n'a pas été le même d'une époque à l'autre."
+    },
+    {
+      "id": 22,
+      "question": "Quel est le nombre total de points sur un dé à six faces de jeu de société ?",
+      "propositions": [
+        "21",
+        "18",
+        "15",
+        "30"
+      ],
+      "réponse": "21",
+      "anecdote": "Les dés les plus courants sont des petits cubes de 1 à 2 cm de côté (souvent 16 mm), possédant donc 6 faces numérotées de 1 à 6."
+    },
+    {
+      "id": 23,
+      "question": "Quelle catégorie d'animaux nourrissent leurs petits avec leur lait ?",
+      "propositions": [
+        "Carnivores",
+        "Primates",
+        "Mammifères",
+        "Rongeurs"
+      ],
+      "réponse": "Mammifères",
+      "anecdote": "Les nouveau-nés nécessitent systématiquement des soins parentaux du fait de leur appareil digestif immature à la naissance."
+    },
+    {
+      "id": 24,
+      "question": "Dans nos jardins, quelle partie de la plante peut s'enfoncer profondément dans la terre ?",
+      "propositions": [
+        "Tige",
+        "Épine",
+        "Racine",
+        "Pétale"
+      ],
+      "réponse": "Racine",
+      "anecdote": "La racine est un organe vital de la plante, qui se forme très tôt lors du développement de la plante, dès le début de la germination."
+    },
+    {
+      "id": 25,
+      "question": "En quelle matière sont fabriqués les pneus des voitures ?",
+      "propositions": [
+        "Caoutchouc",
+        "Liège",
+        "Carbone",
+        "Plastique"
+      ],
+      "réponse": "Caoutchouc",
+      "anecdote": "Un pneu est conçu pour être monté sur la jante d'une roue et gonflé avec un gaz sous pression, habituellement de l'air ou de l'azote."
+    },
+    {
+      "id": 26,
+      "question": "Comment appelle-t-on une maison construite en bois en pleine montagne ?",
+      "propositions": [
+        "Gîte",
+        "Chalet",
+        "Caravane",
+        "Auberge"
+      ],
+      "réponse": "Chalet",
+      "anecdote": "En Suisse romande, le terme chalet désigne également l'édifice où l'on fait le fromage en été dans les hauts alpages."
+    },
+    {
+      "id": 27,
+      "question": "Laquelle de ces nages représente le type de nage le plus rapide ?",
+      "propositions": [
+        "Crawl",
+        "Papillon",
+        "Basse",
+        "Dos"
+      ],
+      "réponse": "Crawl",
+      "anecdote": "En crawl, la position du corps est horizontale et se caractérise par un battement des jambes et d'une rotation des bras en dehors de l'eau."
+    },
+    {
+      "id": 28,
+      "question": "En compétition, que met-on sur le dos de certains sportifs pour les reconnaître ?",
+      "propositions": [
+        "Mouchoir",
+        "Maillot",
+        "Drapeau",
+        "Dossard"
+      ],
+      "réponse": "Dossard",
+      "anecdote": "En dehors du sport hippique, l'athlétisme et le cyclisme furent les premières disciplines à adopter le système de dossard."
+    },
+    {
+      "id": 29,
+      "question": "Quelle source d'énergie permet de faire avancer une planche à voile ?",
+      "propositions": [
+        "Éolienne",
+        "Solaire",
+        "Marine",
+        "Hydraulique"
+      ],
+      "réponse": "Éolienne",
+      "anecdote": "En 2015 l'éolien fournissait 3,4 % de la production mondiale d'électricité. En 2017, cette part a été portée à 4 % avec 539 GW."
+    },
+    {
+      "id": 30,
+      "question": "Quelle course cycliste de France est aussi appelée la Grande Boucle ?",
+      "propositions": [
+        "Paris-Nice",
+        "Milan-San Remo",
+        "Tour de France",
+        "Critérium"
+      ],
+      "réponse": "Tour de France",
+      "anecdote": "Cette compétition cycliste par étapes masculine a lieu principalement en France, tout en traversant occasionnellement les pays voisins."
+    }
+  ]
+}

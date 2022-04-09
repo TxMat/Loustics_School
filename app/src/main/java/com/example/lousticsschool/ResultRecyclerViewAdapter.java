@@ -39,7 +39,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.result_row, parent, false);
+        View view = mInflater.inflate(R.layout.default_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -74,14 +74,9 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
         return mData.get(id);
     }
 
-    // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -108,22 +103,19 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                 return true;
             });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!isCorrectArray.get(getLayoutPosition())) {
-                        switch (exerciceType) {
-                            case "Math":
-                                String[] split = mData.get(getLayoutPosition()).split("=");
-                                split[0] = split[0].trim();
+            itemView.setOnClickListener(view -> {
+                if (!isCorrectArray.get(getLayoutPosition())) {
+                    switch (exerciceType) {
+                        case "Math":
+                            String[] split = mData.get(getLayoutPosition()).split("=");
+                            split[0] = split[0].trim();
 
-                                new AlertDialog.Builder(context)
-                                        .setTitle("Reponse correcte")
-                                        .setMessage("La reponse correcte est :\n" + split[0] + " = " + calculateFromString(split[0]))
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                                break;
-                        }
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Reponse correcte")
+                                    .setMessage("La reponse correcte est :\n" + split[0] + " = " + calculateFromString(split[0]))
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                            break;
                     }
                 }
             });
