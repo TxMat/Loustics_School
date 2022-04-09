@@ -18,10 +18,10 @@ import com.example.lousticsschool.db.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements UserRecyclerViewAdapter.ItemClickListener {
 
     private AppDb db;
-    private RecyclerViewAdapter adapter;
+    private UserRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     private ArrayList<User> usersList = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
         db = AppDb.getInstance(getApplicationContext());
 
-        adapter = new RecyclerViewAdapter(this, usersList);
+        adapter = new UserRecyclerViewAdapter(this, usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.setClickListener(this);

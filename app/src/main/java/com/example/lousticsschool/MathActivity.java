@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MathActivity extends AppCompatActivity {
 
 
@@ -123,8 +125,13 @@ public class MathActivity extends AppCompatActivity {
                     // if the user has answered all the questions fininsh the activity and clear the activity stack
                     if (mathModel.isLastQuestion()) {
                         Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                        intent.putExtra("CALCUL_ARRAY", mathModel.GetCalculArray());
-                        intent.putExtra("ANSWER_ARRAY", mathModel.GetAnswerArray());
+                        // concatenate question array with answer array in an other array and send it to the result activity
+                        ArrayList<String> result = new ArrayList<>();
+                        for (int i = 0; i < mathModel.getTotalQuestionsNb(); i++) {
+                            result.add(mathModel.GetCalculArray().get(i) + " = " + mathModel.GetAnswerArray().get(i));
+                        }
+                        intent.putExtra("RESULT_ARRAY", result);
+                        intent.putExtra("EXERCICE_TYPE", "Math");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
