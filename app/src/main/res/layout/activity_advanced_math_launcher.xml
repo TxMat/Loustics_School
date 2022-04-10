@@ -28,70 +28,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgOperation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:chipSpacingHorizontal="90dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:orientation="vertical">
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSubtract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:checkable="true"
+                    android:text="Soustractions" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:checkable="true"
+                    android:text="Additions"
+                    android:textAlignment="center" />
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:layout_marginEnd="10dp"
-                            android:text="Additions"
-                            android:textAlignment="center" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDivide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:checkable="true"
+                    android:fontFamily="casual"
+                    android:text="Divisions"
+                    android:textSize="14sp" />
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:checkable="true"
-                            android:text="Soustractions" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:checkable="true"
-                            android:text="Multiplicatons" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:checkable="true"
-                            android:fontFamily="casual"
-                            android:text="Divisions"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMultiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:checkable="true"
+                    android:text="Multiplicatons" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -122,7 +100,7 @@
             android:layout_marginEnd="20sp"
             android:stepSize="1"
             android:value="20"
-            android:valueFrom="0"
+            android:valueFrom="1"
             android:valueTo="50" />
 
     </LinearLayout>
@@ -135,7 +113,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnLaunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lancer l'exercice"

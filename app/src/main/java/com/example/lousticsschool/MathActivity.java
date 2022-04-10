@@ -26,10 +26,8 @@ public class MathActivity extends AppCompatActivity {
     private TextView Calc;
     private EditText Answer;
     private Button Next;
-    private Button Previous;
     private Button Quit;
     private LinearLayout QALayout;
-    private TextView QuestionNumber;
     private MathModel mathModel;
 
     private String operator_list;
@@ -60,31 +58,23 @@ public class MathActivity extends AppCompatActivity {
 
         Calc = findViewById(R.id.tvQuestion);
         Answer = findViewById(R.id.Answer);
-        Previous = findViewById(R.id.Previous);
         QALayout = findViewById(R.id.QALayout);
-        QuestionNumber = findViewById(R.id.tvQuestionNumber);
+        TextView questionNumber = findViewById(R.id.tvQuestionNumber);
         Next = findViewById(R.id.next);
         Quit = findViewById(R.id.Quit);
-
-        Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
 
         // if we are on the last question, change the text of the next button an the color
         if (mathModel.getCurrentQuestionNb() == mathModel.getTotalQuestionsNb()) {
             Next.setText(R.string.finish);
-            // set the background color of the next button to the text color of Previous
-            Next.setBackgroundColor(Previous.getCurrentTextColor());
-            Next.setTextColor(Color.BLACK);
         }
 
 
         Calc.setText(mathModel.getCurrentQuestionString() + " = ");
 
         String QuestionNumberString = "Question " + mathModel.getCurrentQuestionNb() + "/" + mathModel.getTotalQuestionsNb();
-        QuestionNumber.setText(QuestionNumberString);
+        questionNumber.setText(QuestionNumberString);
 
         Next.setOnClickListener(view -> CheckResult(Answer.getText().toString()));
-
-        Previous.setOnClickListener(view -> onBackPressed());
 
         Answer.setOnEditorActionListener((textView, i, keyEvent) -> CheckResult(Answer.getText().toString()));
         // ask for confirmation in a dialog when the user clicks on the quit button
@@ -110,7 +100,6 @@ public class MathActivity extends AppCompatActivity {
                 QALayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
             }
             Next.setEnabled(false);
-            Previous.setEnabled(false);
             Answer.setEnabled(false);
             Quit.setEnabled(false);
             mathModel.setCurrentAnswer(answer);
@@ -132,6 +121,7 @@ public class MathActivity extends AppCompatActivity {
                     intent.putExtra("EXERCICE_TYPE", "Math");
                     intent.putExtra("user", current_user);
                     intent.putExtra("oplist", operator_list);
+                    intent.putExtra("qnb", getIntent().getIntExtra("qnb", 10));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
@@ -141,11 +131,11 @@ public class MathActivity extends AppCompatActivity {
                     intent.putExtras(mathModel.getNextBundle());
                     intent.putExtra("user", current_user);
                     intent.putExtra("oplist", operator_list);
+                    intent.putExtra("qnb", getIntent().getIntExtra("qnb", 10));
                     // add a slide animation when starting the next activity
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
                     Next.setEnabled(true);
-                    Previous.setEnabled(mathModel.getCurrentQuestionNb() != 1);
                     Quit.setEnabled(true);
                     finish();
                 }

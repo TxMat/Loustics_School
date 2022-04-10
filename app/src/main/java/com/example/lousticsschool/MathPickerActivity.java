@@ -49,23 +49,23 @@ public class MathPickerActivity extends AppCompatActivity {
         LogoutButton = findViewById(R.id.LogoutButton);
 
         AdditionButton.setOnClickListener(v -> {
-            StartExercise("+");
+            StartExercise("+", 10);
         });
 
         SubtractButton.setOnClickListener(v -> {
-            StartExercise("-");
+            StartExercise("-", 10);
         });
 
         MultiplyButton.setOnClickListener(v -> {
-            StartExercise("x");
+            StartExercise("x", 10);
         });
 
         DivideButton.setOnClickListener(v -> {
-            StartExercise("/");
+            StartExercise("/", 10);
         });
 
         RandomButton.setOnClickListener(v -> {
-            StartExercise("+-x/");
+            StartExercise("+-x/", 10);
         });
 
         AdvancedButton.setOnClickListener(v -> {
@@ -79,10 +79,11 @@ public class MathPickerActivity extends AppCompatActivity {
 
     }
 
-    public void StartExercise(String operator) {
+    public void StartExercise(String operator, int qnb) {
         Intent intent = new Intent(this, MathActivity.class);
         intent.putExtra("oplist", operator);
         intent.putExtra("user", current_user);
+        intent.putExtra("qnb", qnb);
         intent.putExtra("init", "true");
         startActivity(intent);
         finish();
