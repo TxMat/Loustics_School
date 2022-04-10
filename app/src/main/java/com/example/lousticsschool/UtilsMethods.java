@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.widget.NumberPicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
@@ -76,7 +77,7 @@ public class UtilsMethods extends AppCompatActivity {
 
     public static void goToLoggedMenu(AppCompatActivity activity, User user, boolean askConfirm) {
         if (askConfirm) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, R.style.Theme_Material3_Dark_Dialog_Alert));
             builder.setTitle("Abandonner");
             builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
             builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {

@@ -8,13 +8,23 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="Qui utilise l'application ?"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/tvTtitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="Appuie sur ton profil ci dessous"
+        android:textAlignment="center"
+        android:textSize="16sp"
         android:typeface="normal" />
 
     <androidx.recyclerview.widget.RecyclerView

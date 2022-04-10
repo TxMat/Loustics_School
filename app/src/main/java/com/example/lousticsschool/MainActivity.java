@@ -2,6 +2,7 @@ package com.example.lousticsschool;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     //ask for a confirmation when the user wants to exit the app using the back button
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Material3_Dark_Dialog_Alert))
                 .setTitle("Lousics School")
                 .setMessage("Veux-tu vraiment quitter l'application?")
                 .setPositiveButton("Oui", (dialog, which) -> finish())

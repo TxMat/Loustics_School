@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lousticsschool.db.AppDb;
@@ -150,7 +151,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                             String[] split = mData.get(getLayoutPosition()).split("=");
                             split[0] = split[0].trim();
 
-                            new AlertDialog.Builder(context)
+                            new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.Theme_Material3_Dark_Dialog_Alert))
                                     .setTitle("Essaye encore")
                                     .setMessage("La reponse correcte est :\n" + split[0] + " = " + calculateFromString(split[0]))
                                     .setPositiveButton("OK", null)
@@ -178,7 +179,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                 protected void onPostExecute(Quiz qz) {
                     super.onPostExecute(qz);
                     if (action.equals("alert")) {
-                        new AlertDialog.Builder(context)
+                        new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.Theme_Material3_Dark_Dialog_Alert))
                                 .setTitle("Essaye encore")
                                 .setMessage(qz.getQuestion() + "\n\nLa bonne reponse est : " + qz.getCorrectAnswer() + "\n\n-- " + qz.getExplanation() + " --")
                                 .setPositiveButton("OK", null)

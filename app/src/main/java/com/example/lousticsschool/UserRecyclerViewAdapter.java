@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lousticsschool.db.User;
@@ -90,7 +91,7 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
 
             // on long click, ask to delete the user
             itemView.setOnLongClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.Theme_Material3_Dark_Dialog_Alert));
                 builder.setTitle("Supprimer l'utilisateur");
                 builder.setMessage("Voulez-vous vraiment supprimer " + getItem(getAdapterPosition()).getName() + " ?\nCette action est irréversible.");
                 builder.setPositiveButton("Oui, je veux supprimer", (dialog, which) -> {

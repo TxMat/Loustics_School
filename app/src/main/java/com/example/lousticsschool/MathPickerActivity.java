@@ -69,8 +69,9 @@ public class MathPickerActivity extends AppCompatActivity {
         });
 
         AdvancedButton.setOnClickListener(v -> {
-            // show a toast
-            Toast.makeText(this, "Advanced options coming soon!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AdvancedMathActivityLauncher.class);
+            intent.putExtra("user", current_user);
+            startActivity(intent);
         });
 
         LogoutButton.setOnClickListener(v -> UtilsMethods.Logout(this));

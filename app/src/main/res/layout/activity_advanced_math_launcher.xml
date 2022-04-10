@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:id="@+id/LoggedLayout">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="Type d'operations"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="90dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:layout_marginEnd="10dp"
+                            android:text="Additions"
+                            android:textAlignment="center" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:checkable="true"
+                            android:text="Soustractions" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:checkable="true"
+                            android:text="Multiplicatons" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:checkable="true"
+                            android:fontFamily="casual"
+                            android:text="Divisions"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="Nombre de questions"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:stepSize="1"
+            android:value="20"
+            android:valueFrom="0"
+            android:valueTo="50" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lancer l'exercice"
+            android:textAlignment="center" />
+    </LinearLayout>
+</LinearLayout>
+
