@@ -3,10 +3,11 @@ package com.example.lousticsschool.db;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "quiz")
-public class Quiz {
+public class Quiz implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;

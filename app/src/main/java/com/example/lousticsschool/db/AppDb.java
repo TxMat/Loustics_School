@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -32,16 +31,15 @@ public abstract class AppDb extends RoomDatabase {
 
     private static AppDb INSTANCE;
 
-    private static Context context;
+    private static Context ctx;
 
     public static synchronized AppDb getInstance(Context context) {
 
-        context = context.getApplicationContext();
+        ctx = context.getApplicationContext();
 
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context,
-                    AppDb.class, "LSSDatabase")
-                    .fallbackToDestructiveMigration()
+                    AppDb.class, "LSDb")
                     .addCallback(roomCallback)
                     .build();
         }
@@ -64,8 +62,16 @@ public abstract class AppDb extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            fillWithStartingData(context);
+            fillWithStartingData(ctx);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            for (int i = 0; i < 100; i++) {
+                System.out.println("onPostExecute");
+            }
         }
 
     }
@@ -81,7 +87,12 @@ public abstract class AppDb extends RoomDatabase {
 
                 String question = jsonObject.getString("question");
                 String answer = jsonObject.getString("réponse");
-                String[] choices = jsonObject.getString("propositions").split(",");
+                //remove " and [ and ] from the string
+                String prop = jsonObject.getString("propositions")
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace("\"", "");
+                String[] choices = prop.split(",");
                 String explanation = jsonObject.getString("anecdote");
                 System.out.println(Arrays.toString(choices));
 
@@ -90,6 +101,7 @@ public abstract class AppDb extends RoomDatabase {
                 quiz.setCorrectAnswer(answer);
                 quiz.setAnswers(choices);
                 quiz.setExplanation(explanation);
+                System.out.println(quiz);
 
                 quizDao.insert(quiz);
 

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        db = AppDb.getInstance(getApplicationContext());
+        db = AppDb.getInstance(this);
 
         adapter = new UserRecyclerViewAdapter(this, usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

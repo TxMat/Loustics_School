@@ -19,7 +19,7 @@ public class ResultActivity extends AppCompatActivity  {
     private ResultRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     private ArrayList<String> recapList = new ArrayList<>();
-    private final ArrayList<Boolean> isCorrectArray = new ArrayList<>();
+    private ArrayList<Boolean> isCorrectArray = new ArrayList<>();
 
     private TextView tvScore;
     private TextView tvTitle;
@@ -56,6 +56,8 @@ public class ResultActivity extends AppCompatActivity  {
                     }
                 }
                 break;
+            case "Quiz":
+                isCorrectArray = (ArrayList<Boolean>) getIntent().getSerializableExtra("IS_CORRECT_ARRAY");
         }
 
         // tv score is the number of true values in isCorrectArray

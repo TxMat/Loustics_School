@@ -80,6 +80,13 @@ public class LoggedActivity extends UtilsMethods {
             startActivity(intent);
         });
 
+        CG.setOnClickListener(v -> {
+            Intent intent = new Intent(LoggedActivity.this, CultureGeneraleActivity.class);
+            intent.putExtra("user", current_user);
+            intent.putExtra("init", "true");
+            startActivity(intent);
+        });
+
 
     }
 }

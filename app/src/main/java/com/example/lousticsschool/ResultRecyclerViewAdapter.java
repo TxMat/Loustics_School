@@ -97,18 +97,29 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
 
             itemView.setOnLongClickListener(view -> {
                 // on long click, change the string to the correct anwser
-                if (isCorrectArray.get(getAdapterPosition())) {
-                    Toast.makeText(context, "Reponse juste", Toast.LENGTH_SHORT).show();
-                } else {
-                    String[] split = mData.get(getAdapterPosition()).split("=");
-                    // trim the spaces
-                    split[0] = split[0].trim();
-                    String correctAnswer = String.valueOf(calculateFromString(split[0]));
-                    mData.set(getAdapterPosition(), split[0] + " = " + correctAnswer);
-                    // set the text color to yellow
-                    isCorrectArray.set(getAdapterPosition(), true);
-                    isCorrectedArray.set(getAdapterPosition(), true);
-                    notifyItemChanged(getAdapterPosition());
+                switch (exerciceType) {
+                    case "Math":
+                        if (isCorrectArray.get(getAdapterPosition())) {
+                            Toast.makeText(context, "Reponse juste", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String[] split = mData.get(getAdapterPosition()).split("=");
+                            // trim the spaces
+                            split[0] = split[0].trim();
+                            String correctAnswer = String.valueOf(calculateFromString(split[0]));
+                            mData.set(getAdapterPosition(), split[0] + " = " + correctAnswer);
+                            // set the text color to yellow
+                            isCorrectArray.set(getAdapterPosition(), true);
+                            isCorrectedArray.set(getAdapterPosition(), true);
+                            notifyItemChanged(getAdapterPosition());
+                        }
+                        break;
+                    case "Quiz":
+                        if (isCorrectArray.get(getAdapterPosition())) {
+                            Toast.makeText(context, "Reponse juste", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "ATt", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                 }
                 return true;
             });
@@ -126,6 +137,12 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                                     .setPositiveButton("OK", null)
                                     .show();
                             break;
+                        case "Quiz":
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Reponse correcte")
+                                    .setMessage("La reponse correcte est :\n" + mData.get(getLayoutPosition()))
+                                    .setPositiveButton("OK", null)
+                                    .show();
                     }
                 }
             });

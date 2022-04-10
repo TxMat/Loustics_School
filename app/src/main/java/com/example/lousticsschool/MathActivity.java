@@ -88,24 +88,7 @@ public class MathActivity extends AppCompatActivity {
 
         Answer.setOnEditorActionListener((textView, i, keyEvent) -> CheckResult(Answer.getText().toString()));
         // ask for confirmation in a dialog when the user clicks on the quit button
-        Quit.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MathActivity.this);
-            builder.setTitle("Abandonner");
-            builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
-            builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
-                        Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
-                        //clear all the activity stack
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("user", current_user);
-                        startActivity(intent);
-                        finish();
-                    }
-            );
-            builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> {
-                dialog.dismiss();
-            });
-            builder.show();
-        });
+        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user); });
 
 
     }
