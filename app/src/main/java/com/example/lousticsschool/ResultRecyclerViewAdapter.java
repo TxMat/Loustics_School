@@ -136,7 +136,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                         if (isCorrectArray.get(getAdapterPosition())) {
                             Toast.makeText(context, "Reponse juste", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(context, "ATt", Toast.LENGTH_SHORT).show();
+                            quizAsyncMethods(idList.get(getLayoutPosition()), "correct");
                         }
                         break;
                 }
@@ -151,13 +151,13 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                             split[0] = split[0].trim();
 
                             new AlertDialog.Builder(context)
-                                    .setTitle("Reponse correcte")
+                                    .setTitle("Essaye encore")
                                     .setMessage("La reponse correcte est :\n" + split[0] + " = " + calculateFromString(split[0]))
                                     .setPositiveButton("OK", null)
                                     .show();
                             break;
                         case "Quiz":
-                            AlertAnswersAndExpl(idList.get(getLayoutPosition()));
+                            quizAsyncMethods(idList.get(getLayoutPosition()), "alert");
                     }
                 }
             });
@@ -165,9 +165,9 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
 
         }
 
-        private void AlertAnswersAndExpl(long id) {
+        private void quizAsyncMethods(long id, String action) {
 
-            class GetQuestions extends AsyncTask<Void, Void, Quiz> {
+            class QuizAsyncMethods extends AsyncTask<Void, Void, Quiz> {
 
                 @Override
                 protected Quiz doInBackground(Void... voids) {
@@ -177,15 +177,23 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                 @Override
                 protected void onPostExecute(Quiz qz) {
                     super.onPostExecute(qz);
-                    new AlertDialog.Builder(context)
-                            .setTitle("Reponse correcte")
-                            .setMessage("La reponse correcte est :\n" + qz.getCorrectAnswer() + "\n\n" + qz.getExplanation())
-                            .setPositiveButton("OK", null)
-                            .show();
+                    if (action.equals("alert")) {
+                        new AlertDialog.Builder(context)
+                                .setTitle("Essaye encore")
+                                .setMessage(qz.getQuestion() + "\n\nLa bonne reponse est : " + qz.getCorrectAnswer() + "\n\n**" + qz.getExplanation() + "**")
+                                .setPositiveButton("OK", null)
+                                .show();
+                    } else if (action.equals("correct")) {
+                        mData.set(getAdapterPosition(), qz.getCorrectAnswer());
+                        isCorrectArray.set(getAdapterPosition(), true);
+                        isCorrectedArray.set(getAdapterPosition(), true);
+                        notifyItemChanged(getAdapterPosition());
+
+                    }
                 }
             }
 
-            GetQuestions gu = new GetQuestions();
+            QuizAsyncMethods gu = new QuizAsyncMethods();
             gu.execute();
         }
 
