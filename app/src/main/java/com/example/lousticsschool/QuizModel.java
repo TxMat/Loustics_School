@@ -8,9 +8,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class QuizModel implements Serializable {
-    private ArrayList<Quiz> question_array;
+    private final ArrayList<Quiz> question_array;
     private ArrayList<String> user_answers;
     private ArrayList<Boolean> answer_boolean;
+    private ArrayList<Long> idList;
     private int total_questions;
     private int question_nb;
 
@@ -20,6 +21,7 @@ public class QuizModel implements Serializable {
         user_answers = new ArrayList<>();
         question_nb = 1;
         answer_boolean = new ArrayList<>();
+        idList = new ArrayList<>();
         // choose a random question in quizArray and avoid duplicates
         for (int i = 0; i < total_questions; i++) {
             int random = (int) (Math.random() * quizArray.size());
@@ -27,8 +29,9 @@ public class QuizModel implements Serializable {
             // check if the question is already in the array
             if (!question_array.contains(quiz)) {
                 question_array.add(quiz);
+                idList.add(quiz.getId());
             } else {
-                i--; // ugly but works
+                i--;
             }
         }
 
@@ -36,6 +39,10 @@ public class QuizModel implements Serializable {
 
 
 
+    }
+
+    public ArrayList<Long> getIdList() {
+        return idList;
     }
 
     public int getTotalQuestionsNb() {
@@ -50,6 +57,10 @@ public class QuizModel implements Serializable {
         // print the array for debugging
 
         return user_answers;
+    }
+
+    public ArrayList<Quiz> getQuestion_array() {
+        return question_array;
     }
 
     public void addUserAnswer(String answer) {

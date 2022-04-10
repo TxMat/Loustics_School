@@ -2,17 +2,21 @@ package com.example.lousticsschool;
 
 import static com.example.lousticsschool.UtilsMethods.calculateFromString;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
+import com.example.lousticsschool.db.AppDb;
+import com.example.lousticsschool.db.Quiz;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ResultActivity extends AppCompatActivity  {
 
@@ -30,7 +34,6 @@ public class ResultActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
 
         String exerciceType = getIntent().getStringExtra("EXERCICE_TYPE");
 
@@ -42,6 +45,7 @@ public class ResultActivity extends AppCompatActivity  {
         // initialize isCorrect array by comparing the user's answer with the correct answer
         switch (exerciceType) {
             case "Math":
+                recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
                 for (int i = 0; i < recapList.size(); i++) {
                     // split the string by "="
                     String[] split = recapList.get(i).split("=");
@@ -55,9 +59,14 @@ public class ResultActivity extends AppCompatActivity  {
                         isCorrectArray.add(false);
                     }
                 }
+                adapter = new ResultRecyclerViewAdapter(this, recapList, isCorrectArray, exerciceType);
                 break;
             case "Quiz":
                 isCorrectArray = (ArrayList<Boolean>) getIntent().getSerializableExtra("IS_CORRECT_ARRAY");
+                recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
+                ArrayList<Long> id = (ArrayList<Long>) getIntent().getSerializableExtra("ID_LIST");
+                adapter = new ResultRecyclerViewAdapter(this, recapList, isCorrectArray, exerciceType, id);
+
         }
 
         // tv score is the number of true values in isCorrectArray
@@ -84,17 +93,11 @@ public class ResultActivity extends AppCompatActivity  {
         }
 
         recyclerView = findViewById(R.id.rvAnswers);
-        adapter = new ResultRecyclerViewAdapter(this, recapList, isCorrectArray, exerciceType);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-
-
-
-
     }
-
 
 }

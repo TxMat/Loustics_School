@@ -140,6 +140,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
                     intent.putExtra("RESULT_ARRAY", quizModel.getUserAnswers());
                     intent.putExtra("EXERCICE_TYPE", "Quiz");
                     intent.putExtra("IS_CORRECT_ARRAY", quizModel.getAnswer_boolean());
+                    intent.putExtra("ID_LIST", quizModel.getIdList());
                     startActivity(intent);
                     finish();
                 } else {

@@ -4,6 +4,7 @@ import static com.example.lousticsschool.UtilsMethods.calculateFromString;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lousticsschool.db.AppDb;
+import com.example.lousticsschool.db.Quiz;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecyclerViewAdapter.ViewHolder> {
 
+    private ArrayList<Long> idList;
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
@@ -39,6 +44,20 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
         for (int i = 0; i < isCorrectArray.size(); i++) {
             isCorrectedArray.add(false);
         }
+    }
+
+    public ResultRecyclerViewAdapter(ResultActivity context, ArrayList<String> recapList, ArrayList<Boolean> isCorrectArray, String exerciceType, ArrayList<Long> id) {
+        this.context = context;
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = recapList;
+        this.isCorrectArray = isCorrectArray;
+        this.exerciceType = exerciceType;
+        // init isCorrectedArray with false
+        isCorrectedArray = new ArrayList<>();
+        for (int i = 0; i < isCorrectArray.size(); i++) {
+            isCorrectedArray.add(false);
+        }
+        this.idList = id;
     }
 
     // inflates the row layout from xml when needed
@@ -138,17 +157,41 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                                     .show();
                             break;
                         case "Quiz":
-                            new AlertDialog.Builder(context)
-                                    .setTitle("Reponse correcte")
-                                    .setMessage("La reponse correcte est :\n" + mData.get(getLayoutPosition()))
-                                    .setPositiveButton("OK", null)
-                                    .show();
+                            AlertAnswersAndExpl(idList.get(getLayoutPosition()));
                     }
                 }
             });
+
+
+        }
+
+        private void AlertAnswersAndExpl(long id) {
+
+            class GetQuestions extends AsyncTask<Void, Void, Quiz> {
+
+                @Override
+                protected Quiz doInBackground(Void... voids) {
+                    return AppDb.getInstance(context).quizDao().getQuiz(id);
+                }
+
+                @Override
+                protected void onPostExecute(Quiz qz) {
+                    super.onPostExecute(qz);
+                    new AlertDialog.Builder(context)
+                            .setTitle("Reponse correcte")
+                            .setMessage("La reponse correcte est :\n" + qz.getCorrectAnswer() + "\n\n" + qz.getExplanation())
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+            }
+
+            GetQuestions gu = new GetQuestions();
+            gu.execute();
         }
 
     }
+
+
 
 
 }
