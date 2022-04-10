@@ -28,19 +28,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/cgOperation"
-                android:layout_width="match_parent"
+                android:layout_width="235sp"
                 android:layout_height="wrap_content"
-                app:chipSpacingHorizontal="90dp">
+                app:chipSpacingHorizontal="20dp"
+                app:singleLine="false"
+                app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipSubtract"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:checkable="true"
                     android:text="Soustractions" />
 
@@ -48,7 +50,6 @@
                     android:id="@+id/chipAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:checkable="true"
                     android:text="Additions"
                     android:textAlignment="center" />
@@ -57,7 +58,6 @@
                     android:id="@+id/chipDivide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:checkable="true"
                     android:fontFamily="casual"
                     android:text="Divisions"
@@ -67,7 +67,6 @@
                     android:id="@+id/chipMultiply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:checkable="true"
                     android:text="Multiplicatons" />
 
@@ -99,7 +98,7 @@
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"
             android:stepSize="1"
-            android:value="20"
+            android:value="10"
             android:valueFrom="1"
             android:valueTo="50" />
 
