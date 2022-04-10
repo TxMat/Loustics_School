@@ -58,11 +58,11 @@ public class MathActivity extends AppCompatActivity {
         }
 
 
-        Calc = findViewById(R.id.MathTextView);
+        Calc = findViewById(R.id.tvQuestion);
         Answer = findViewById(R.id.Answer);
         Previous = findViewById(R.id.Previous);
         QALayout = findViewById(R.id.QALayout);
-        QuestionNumber = findViewById(R.id.QuestionNumber);
+        QuestionNumber = findViewById(R.id.tvQuestionNumber);
         Next = findViewById(R.id.next);
         Quit = findViewById(R.id.Quit);
 
