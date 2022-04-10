@@ -115,6 +115,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         for (Button button : buttons) {
             button.setEnabled(false);
         }
+        Quit.setEnabled(false);
 
         if (quizModel.isCorrect(btntxt)) {
             btn.setTextColor(Color.GREEN);
@@ -163,6 +164,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
                 for (Button button : buttons) {
                     button.setEnabled(true);
                 }
+                Quit.setEnabled(true);
             }
         }, 1000);
 

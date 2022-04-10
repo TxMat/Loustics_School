@@ -21,7 +21,7 @@ public class UtilsMethods extends AppCompatActivity {
     // ask user if they want to logout
     public static void Logout(AppCompatActivity activity) {
         new android.app.AlertDialog.Builder(activity)
-                .setTitle("Logout")
+                .setTitle("Se Deconnecter")
                 .setMessage("Voulez vous vraiment vous déconnecter ?")
                 .setPositiveButton("Oui", (dialog, which) -> {
                             Intent intent = new Intent(activity, MainActivity.class);

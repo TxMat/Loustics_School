@@ -180,7 +180,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
                     if (action.equals("alert")) {
                         new AlertDialog.Builder(context)
                                 .setTitle("Essaye encore")
-                                .setMessage(qz.getQuestion() + "\n\nLa bonne reponse est : " + qz.getCorrectAnswer() + "\n\n**" + qz.getExplanation() + "**")
+                                .setMessage(qz.getQuestion() + "\n\nLa bonne reponse est : " + qz.getCorrectAnswer() + "\n\n-- " + qz.getExplanation() + " --")
                                 .setPositiveButton("OK", null)
                                 .show();
                     } else if (action.equals("correct")) {

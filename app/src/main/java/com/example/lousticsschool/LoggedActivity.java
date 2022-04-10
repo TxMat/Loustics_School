@@ -38,6 +38,11 @@ public class LoggedActivity extends UtilsMethods {
     private Button Logout;
 
     @Override
+    public void onBackPressed(){
+        UtilsMethods.Logout(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged);
