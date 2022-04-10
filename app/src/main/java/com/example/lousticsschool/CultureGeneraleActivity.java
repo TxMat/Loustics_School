@@ -118,6 +118,10 @@ public class CultureGeneraleActivity extends AppCompatActivity {
 
         if (quizModel.isCorrect(btntxt)) {
             btn.setTextColor(Color.GREEN);
+            // if isTheFirstAwnser add 1 to the total correct answers of the user
+            if (isTheFirstAwnser) {
+                current_user.setTotalQuestionsCorrect(current_user.getTotalQuestionsCorrect() + 1);
+            }
             isReady = true;
         } else {
             btn.setEnabled(false);
@@ -134,6 +138,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
             }
             if (isReady) {
                 // check if we are on the last question
+                current_user.setTotalQuestionsAnswered(current_user.getTotalQuestionsAnswered() + 1);
                 if (quizModel.getQuestionNb() == quizModel.getTotalQuestionsNb()) {
                     // if we are on the last question, go to the result activity
                     Intent intent = new Intent(this, ResultActivity.class);
