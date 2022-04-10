@@ -20,15 +20,22 @@ public class QuizModel implements Serializable {
         user_answers = new ArrayList<>();
         question_nb = 1;
         answer_boolean = new ArrayList<>();
-        // choose random
+        // choose a random question in quizArray and avoid duplicates
         for (int i = 0; i < total_questions; i++) {
             int random = (int) (Math.random() * quizArray.size());
-            question_array.add(quizArray.get(random));
+            Quiz quiz = quizArray.get(random);
+            // check if the question is already in the array
+            if (!question_array.contains(quiz)) {
+                question_array.add(quiz);
+            } else {
+                i--; // ugly but works
+            }
         }
-    }
 
-    public Quiz getQuestion(int index) {
-        return question_array.get(index);
+
+
+
+
     }
 
     public int getTotalQuestionsNb() {
@@ -37,10 +44,6 @@ public class QuizModel implements Serializable {
 
     public int getQuestionNb() {
         return question_nb;
-    }
-
-    public void setQuestionNb(int question_nb) {
-        this.question_nb = question_nb;
     }
 
     public ArrayList<String> getUserAnswers() {
