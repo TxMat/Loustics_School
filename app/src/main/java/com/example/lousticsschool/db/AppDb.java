@@ -66,14 +66,6 @@ public abstract class AppDb extends RoomDatabase {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            for (int i = 0; i < 100; i++) {
-                System.out.println("onPostExecute");
-            }
-        }
-
     }
 
 

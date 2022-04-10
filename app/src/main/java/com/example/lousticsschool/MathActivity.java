@@ -90,6 +90,8 @@ public class MathActivity extends AppCompatActivity {
         // ask for confirmation in a dialog when the user clicks on the quit button
         Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user, true); });
 
+        Answer.requestFocus();
+
 
     }
 

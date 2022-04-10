@@ -119,9 +119,7 @@
       ],
       "réponse": "Volcan",
       "anecdote": "Les laves refroidies peuvent atteindre des milliers de mètres d'épaisseur, formant parfois des montagnes ou des îles."
-    }
-  ],
-  "confirmé": [
+    },
     {
       "id": 11,
       "question": "Laquelle de ces propositions désigne ce qui apparaît en premier sur un arbre ?",
@@ -241,9 +239,7 @@
       ],
       "réponse": "Rouge",
       "anecdote": "Un jeu français comprend 52 cartes à jouer, réparties suivant treize valeurs sur quatre enseignes : pique, coeur, carreau et trèfle."
-    }
-  ],
-  "expert": [
+    },
     {
       "id": 21,
       "question": "Comment appelle-t-on la ligne imaginaire qui sépare deux pays ?",
