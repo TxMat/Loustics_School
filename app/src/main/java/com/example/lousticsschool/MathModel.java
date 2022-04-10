@@ -21,12 +21,12 @@ public class MathModel implements Serializable {
         this.user_answers = new ArrayList<>();
         this.calcul_array = new ArrayList<>();
         for (int i = 0; i < total_questions; i++) {
-            Bundle bundle = RandomizeCalc(2,100,operator_list);
             // check if the calculation is not already in the arraylist if it is, generate a new one
-            while (calcul_array.contains(bundle.getString("FIRST_NUMBER") + bundle.getString("OPERATOR") + bundle.getString("SECOND_NUMBER"))) {
-                bundle = RandomizeCalc(2,100,operator_list);
+            String calc = RandomizeCalc(2,100,operator_list);
+            while (calcul_array.contains(calc)) {
+                calc = RandomizeCalc(2,100,operator_list);
             }
-            calcul_array.add(bundle.getInt("FIRST_NUMBER") + " " + bundle.getString("OPERATOR") + " " + bundle.getInt("SECOND_NUMBER"));
+            calcul_array.add(calc);
         }
     }
 
@@ -69,8 +69,7 @@ public class MathModel implements Serializable {
 
 
     @NonNull
-    public static Bundle RandomizeCalc(int min, int max, @NonNull String operator_list) {
-        Bundle bundle = new Bundle();
+    public static String RandomizeCalc(int min, int max, @NonNull String operator_list) {
         String operator = operator_list.charAt((int) (Math.random() * operator_list.length())) + "";
         int randomSecondNumber;
         int randomFirstNumber;
@@ -87,10 +86,7 @@ public class MathModel implements Serializable {
             randomSecondNumber = getRandomInt(min, max/10);
         }
 
-        bundle.putString("OPERATOR", operator);
-        bundle.putInt("FIRST_NUMBER", randomFirstNumber);
-        bundle.putInt("SECOND_NUMBER", randomSecondNumber);
-        return bundle;
+        return randomFirstNumber + " " + operator + " " + randomSecondNumber;
     }
 
     public Bundle getNextBundle(){

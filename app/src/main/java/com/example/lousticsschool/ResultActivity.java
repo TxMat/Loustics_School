@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.Quiz;
+import com.example.lousticsschool.db.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,9 +26,17 @@ public class ResultActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private ArrayList<String> recapList = new ArrayList<>();
     private ArrayList<Boolean> isCorrectArray = new ArrayList<>();
+    private User current_user;
 
     private TextView tvScore;
     private TextView tvTitle;
+    private Button btnRestart;
+    private Button btnBack;
+
+    @Override
+    public void onBackPressed() {
+        UtilsMethods.goToLoggedMenu(this, current_user, false);
+    }
 
 
     @Override
@@ -36,9 +46,15 @@ public class ResultActivity extends AppCompatActivity  {
 
 
         String exerciceType = getIntent().getStringExtra("EXERCICE_TYPE");
+        current_user = (User) getIntent().getSerializableExtra("user");
 
         tvScore = findViewById(R.id.tvScore);
         tvTitle = findViewById(R.id.tvTitle);
+        btnRestart = findViewById(R.id.RetryButton);
+        btnBack = findViewById(R.id.ChangeButton);
+
+        btnBack.setOnClickListener(v -> onBackPressed());
+        btnRestart.setOnClickListener(v -> goToExercice(this, exerciceType));
 
 
 
@@ -97,6 +113,19 @@ public class ResultActivity extends AppCompatActivity  {
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+
+
+    }
+
+    private void goToExercice(ResultActivity resultActivity, String exerciceType) {
+        if (exerciceType.equals("Math")) {
+            UtilsMethods.startMathActivity(resultActivity, current_user, getIntent().getStringExtra("oplist"), getIntent().getIntExtra("qnb", 10));
+        }
+        else if (exerciceType.equals("Quiz")) {
+            UtilsMethods.startCGActivity(resultActivity, current_user);
+        }
+
 
     }
 

@@ -1,10 +1,12 @@
 package com.example.lousticsschool;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.NumberPicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -72,23 +74,33 @@ public class UtilsMethods extends AppCompatActivity {
         du.execute();
     }
 
-    public static void goToLoggedMenu(AppCompatActivity activity, User user) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Abandonner");
-        builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
-        builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
-                    Intent intent = new Intent(activity, LoggedActivity.class);
-                    //clear all the activity stack
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("user", user);
-                    activity.startActivity(intent);
-                    activity.finish();
-                }
-        );
-        builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> {
-            dialog.dismiss();
-        });
-        builder.show();
+    public static void goToLoggedMenu(AppCompatActivity activity, User user, boolean askConfirm) {
+        if (askConfirm) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle("Abandonner");
+            builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
+            builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
+                Quit(activity, user);
+            }
+            );
+            builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> {
+                dialog.dismiss();
+            });
+            builder.show();
+        }
+        else {
+            Quit(activity, user);
+        }
+
+    }
+
+    public static void Quit(AppCompatActivity activity, User user){
+        Intent intent = new Intent(activity, LoggedActivity.class);
+        //clear all the activity stack
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("user", user);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
     public static int[] randomizeArray(int length) {
@@ -107,7 +119,40 @@ public class UtilsMethods extends AppCompatActivity {
         }
         return arr;
     }
-}
+
+    public static void startCGActivity(AppCompatActivity context, User user) {
+        final NumberPicker numberPicker = new NumberPicker(context);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(20); // max number of questions to be asked is 20
+        numberPicker.setValue(10); // default number of questions to be asked is 10
+        numberPicker.setWrapSelectorWheel(false);
+
+        new androidx.appcompat.app.AlertDialog.Builder(context)
+                .setTitle("Choisissez le nombre de questions")
+                .setView(numberPicker)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    Intent intent = new Intent(context, CultureGeneraleActivity.class);
+                    intent.putExtra("user", user);
+                    intent.putExtra("numberOfQuestions", numberPicker.getValue());
+                    intent.putExtra("init", "true");
+                    context.startActivity(intent);
+                    context.finish();
+                })
+                .setNegativeButton("Annuler", null)
+                .show();
+    }
+
+
+        public static void startMathActivity(AppCompatActivity context, User user, String opList, int qnb) {
+            Intent intent = new Intent(context, MathActivity.class);
+            intent.putExtra("oplist", opList);
+            intent.putExtra("user", user);
+            intent.putExtra("qnb", qnb);
+            intent.putExtra("init", "true");
+            context.startActivity(intent);
+            context.finish();
+        }
+    }
 
 // End of file
 // Path: src/main/java/com/example/lousticsschool/UtilsMethods.java

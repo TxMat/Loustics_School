@@ -28,6 +28,11 @@ public class MathPickerActivity extends AppCompatActivity {
 
 
     @Override
+    public void onBackPressed() {
+        UtilsMethods.goToLoggedMenu(this, current_user, false);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math_picker);
@@ -73,9 +78,9 @@ public class MathPickerActivity extends AppCompatActivity {
 
     }
 
-    private void StartExercise(String operator) {
+    public void StartExercise(String operator) {
         Intent intent = new Intent(this, MathActivity.class);
-        intent.putExtra("operator_list", operator);
+        intent.putExtra("oplist", operator);
         intent.putExtra("user", current_user);
         intent.putExtra("init", "true");
         startActivity(intent);

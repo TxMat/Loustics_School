@@ -49,10 +49,10 @@ public class MathActivity extends AppCompatActivity {
         // get the current user
         current_user = (User) getIntent().getSerializableExtra("user");
 
-        operator_list = getIntent().getStringExtra("operator_list");
+        operator_list = getIntent().getStringExtra("oplist");
 
         if (getIntent().getExtras().get("init") != null) {
-            mathModel = new MathModel(10, operator_list);
+            mathModel = new MathModel(getIntent().getIntExtra("qnb", 10), operator_list);
         } else {
             mathModel = (MathModel) getIntent().getSerializableExtra("mathModel");
         }
@@ -88,7 +88,7 @@ public class MathActivity extends AppCompatActivity {
 
         Answer.setOnEditorActionListener((textView, i, keyEvent) -> CheckResult(Answer.getText().toString()));
         // ask for confirmation in a dialog when the user clicks on the quit button
-        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user); });
+        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user, true); });
 
 
     }
@@ -128,6 +128,8 @@ public class MathActivity extends AppCompatActivity {
                     }
                     intent.putExtra("RESULT_ARRAY", result);
                     intent.putExtra("EXERCICE_TYPE", "Math");
+                    intent.putExtra("user", current_user);
+                    intent.putExtra("oplist", operator_list);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
@@ -136,6 +138,7 @@ public class MathActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MathActivity.class);
                     intent.putExtras(mathModel.getNextBundle());
                     intent.putExtra("user", current_user);
+                    intent.putExtra("oplist", operator_list);
                     // add a slide animation when starting the next activity
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);

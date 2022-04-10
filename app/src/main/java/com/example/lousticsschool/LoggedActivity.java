@@ -3,7 +3,10 @@ package com.example.lousticsschool;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
@@ -75,18 +78,14 @@ public class LoggedActivity extends UtilsMethods {
         Logout.setOnClickListener(v -> UtilsMethods.Logout(this));
 
         Math.setOnClickListener(v -> {
-            Intent intent = new Intent(LoggedActivity.this, MathPickerActivity.class);
+            Intent intent = new Intent(this, MathPickerActivity.class);
             intent.putExtra("user", current_user);
             startActivity(intent);
         });
 
-        CG.setOnClickListener(v -> {
-            Intent intent = new Intent(LoggedActivity.this, CultureGeneraleActivity.class);
-            intent.putExtra("user", current_user);
-            intent.putExtra("init", "true");
-            startActivity(intent);
-        });
-
+        CG.setOnClickListener(v -> { UtilsMethods.startCGActivity(this, current_user); });
 
     }
+
+
 }

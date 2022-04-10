@@ -77,7 +77,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         String QuestionNumberString = "Question " + quizModel.getQuestionNb() + "/" + quizModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
 
-        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user); });
+        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user, true); });
 
         Question.setText(quizModel.getCurrentQuestionObject().getQuestion());
 
@@ -146,6 +146,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
                     intent.putExtra("EXERCICE_TYPE", "Quiz");
                     intent.putExtra("IS_CORRECT_ARRAY", quizModel.getAnswer_boolean());
                     intent.putExtra("ID_LIST", quizModel.getIdList());
+                    intent.putExtra("user", current_user);
                     startActivity(intent);
                     finish();
                 } else {
@@ -188,7 +189,8 @@ public class CultureGeneraleActivity extends AppCompatActivity {
             protected void onPostExecute(List<Quiz> qz) {
                 super.onPostExecute(qz);
                 questionList = (ArrayList<Quiz>) qz;
-                quizModel = new QuizModel(3, questionList);
+                int questionnb = getIntent().getIntExtra("numberOfQuestions", 10);
+                quizModel = new QuizModel(questionnb, questionList);
                 initialize();
             }
         }
