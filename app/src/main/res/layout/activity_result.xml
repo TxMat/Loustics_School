@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="[ 8/10 ]"
+            android:text="@string/score_place_holder"
             android:textAlignment="center"
             android:textSize="34sp" />
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Presque !"
+            android:text="@string/title_place_holder"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -37,8 +37,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Voici un recapitulatif de tes reponses :"
+            android:text="@string/rcprep"
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="@string/expl"
+            android:textAlignment="center"
+            android:textSize="11sp" />
 
     </LinearLayout>
 
@@ -65,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Changer\nd'exercice" />
+            android:text="@string/chgex" />
 
         <Button
             android:id="@+id/RetryButton"
@@ -73,6 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Recommencer" />
+            android:text="@string/retry" />
     </LinearLayout>
 </LinearLayout>

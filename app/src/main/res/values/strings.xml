@@ -13,4 +13,10 @@
     <string name="almost_there">Tu peux y arriver !</string>
     <string name="almost_perfect">Presque Parfait !</string>
     <string name="perfect">Sans faute !</string>
+    <string name="rcprep">Voici un recapitulatif de tes reponses :</string>
+    <string name="chgex">Changer\nd\'exercice</string>
+    <string name="retry">Recommencer</string>
+    <string name="expl">( appuie brievement sur tes erreurs pour voir leur corrction\nou plus longtemps pour les corriger )</string>
+    <string name="title_place_holder">Title_place_holder</string>
+    <string name="score_place_holder">Score_place_holder</string>
 </resources>
