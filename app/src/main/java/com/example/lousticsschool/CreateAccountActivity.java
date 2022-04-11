@@ -16,7 +16,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private AppDb db;
 
-    private Button Sumbit;
     private EditText etName;
 
     @Override
@@ -27,11 +26,11 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_create_account);
 
-        Sumbit = findViewById(R.id.AddUserButton);
+        Button sumbit = findViewById(R.id.AddUserButton);
 
         etName = findViewById(R.id.editTextTextPersonName);
 
-        Sumbit.setOnClickListener(v -> saveUser());
+        sumbit.setOnClickListener(v -> saveUser());
 
 
     }
@@ -48,9 +47,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             return;
         }
 
-        /**
-         * Création d'une classe asynchrone pour sauvegarder la tache donnée par l'utilisateur
-         */
         class SaveUser extends AsyncTask<Void, Void, User> {
 
             @Override

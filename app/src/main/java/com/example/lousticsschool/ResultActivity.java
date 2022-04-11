@@ -7,31 +7,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.lousticsschool.db.AppDb;
-import com.example.lousticsschool.db.Quiz;
 import com.example.lousticsschool.db.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ResultActivity extends AppCompatActivity  {
 
     private ResultRecyclerViewAdapter adapter;
-    private RecyclerView recyclerView;
-    private ArrayList<String> recapList = new ArrayList<>();
     private ArrayList<Boolean> isCorrectArray = new ArrayList<>();
     private User current_user;
-
-    private TextView tvScore;
-    private TextView tvTitle;
-    private Button btnRestart;
-    private Button btnBack;
 
     @Override
     public void onBackPressed() {
@@ -48,10 +36,10 @@ public class ResultActivity extends AppCompatActivity  {
         String exerciceType = getIntent().getStringExtra("EXERCICE_TYPE");
         current_user = (User) getIntent().getSerializableExtra("user");
 
-        tvScore = findViewById(R.id.tvScore);
-        tvTitle = findViewById(R.id.tvTitle);
-        btnRestart = findViewById(R.id.RetryButton);
-        btnBack = findViewById(R.id.ChangeButton);
+        TextView tvScore = findViewById(R.id.tvScore);
+        TextView tvTitle = findViewById(R.id.tvTitle);
+        Button btnRestart = findViewById(R.id.RetryButton);
+        Button btnBack = findViewById(R.id.ChangeButton);
 
         btnBack.setOnClickListener(v -> onBackPressed());
         btnRestart.setOnClickListener(v -> goToExercice(this, exerciceType));
@@ -61,7 +49,7 @@ public class ResultActivity extends AppCompatActivity  {
         // initialize isCorrect array by comparing the user's answer with the correct answer
         switch (exerciceType) {
             case "Math":
-                recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
+                ArrayList<String> recapList = getIntent().getStringArrayListExtra("RESULT_ARRAY");
                 for (int i = 0; i < recapList.size(); i++) {
                     // split the string by "="
                     String[] split = recapList.get(i).split("=");
@@ -108,7 +96,7 @@ public class ResultActivity extends AppCompatActivity  {
             tvTitle.setText(R.string.perfect);
         }
 
-        recyclerView = findViewById(R.id.rvAnswers);
+        RecyclerView recyclerView = findViewById(R.id.rvAnswers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);

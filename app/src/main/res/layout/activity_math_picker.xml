@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:id="@+id/LoggedLayout">
+    android:gravity="center_horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,7 +13,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/ChooseExercice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
@@ -33,13 +29,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="Additions" />
+                android:text="Additions"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/SoustractionsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Soustractions" />
+                android:text="Soustractions"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,13 +50,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="Multiplications" />
+                android:text="Multiplications"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/DivisionsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Divisions" />
+                android:text="Divisions"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
 
         <Button
@@ -105,7 +105,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/Version"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

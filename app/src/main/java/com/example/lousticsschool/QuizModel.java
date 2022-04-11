@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class QuizModel implements Serializable {
     private final ArrayList<Quiz> question_array;
-    private ArrayList<String> user_answers;
-    private ArrayList<Boolean> answer_boolean;
-    private ArrayList<Long> idList;
-    private int total_questions;
+    private final ArrayList<String> user_answers;
+    private final ArrayList<Boolean> answer_boolean;
+    private final ArrayList<Long> idList;
+    private final int total_questions;
     private int question_nb;
 
     public QuizModel(int total_questions, ArrayList<Quiz> quizArray) {
@@ -57,10 +57,6 @@ public class QuizModel implements Serializable {
         // print the array for debugging
 
         return user_answers;
-    }
-
-    public ArrayList<Quiz> getQuestion_array() {
-        return question_array;
     }
 
     public void addUserAnswer(String answer) {

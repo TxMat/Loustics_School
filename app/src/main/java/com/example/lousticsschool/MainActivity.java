@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.lousticsschool.db.AppDb;
@@ -21,13 +20,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppDb db;
     private UserRecyclerViewAdapter adapter;
-    private RecyclerView recyclerView;
     private ArrayList<User> usersList = new ArrayList<>();
-
-    private Button CreateAccountButton;
-    private Button GuestButton;
 
 
     @Override
@@ -35,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        db = AppDb.getInstance(this);
+        AppDb db = AppDb.getInstance(this);
 
         adapter = new UserRecyclerViewAdapter(this, usersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,15 +40,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        CreateAccountButton = findViewById(R.id.CreateAccountButton);
-        GuestButton = findViewById(R.id.GuestButton);
-        CreateAccountButton.setOnClickListener(v -> {
+        Button createAccountButton = findViewById(R.id.CreateAccountButton);
+        Button guestButton = findViewById(R.id.GuestButton);
+        createAccountButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
             startActivity(intent);
         });
 
 
-        GuestButton.setOnClickListener(v -> {
+        guestButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoggedActivity.class);
             Bundle bundle = new Bundle();
             // create a guest user

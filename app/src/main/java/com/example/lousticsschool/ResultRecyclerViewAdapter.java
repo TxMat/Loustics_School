@@ -25,13 +25,12 @@ import java.util.List;
 public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Long> idList;
-    private List<String> mData;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
-    private List<Boolean> isCorrectArray;
-    private List<Boolean> isCorrectedArray;
-    private String exerciceType;
-    private Context context;
+    private final List<String> mData;
+    private final LayoutInflater mInflater;
+    private final List<Boolean> isCorrectArray;
+    private final List<Boolean> isCorrectedArray;
+    private final String exerciceType;
+    private final Context context;
 
     // data is passed into the constructor
     ResultRecyclerViewAdapter(Context context, List<String> data, List<Boolean> isCorrectArray, String exerciceType) {
@@ -89,27 +88,10 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
         return mData.size();
     }
 
-    public void updateData(ArrayList<String> strList) {
-        mData = strList;
-        notifyDataSetChanged();
-    }
-
-
-
-
-    // convenience method for getting data at click position
-    String getItem(int id) {
-        return mData.get(id);
-    }
-
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-    }
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView myTextView;
+        final TextView myTextView;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -18,7 +17,6 @@
         android:typeface="normal" />
 
     <TextView
-        android:id="@+id/tvTtitle2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -30,7 +28,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:scrollbars="vertical">
 
@@ -43,7 +41,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,7 +51,6 @@
             android:typeface="normal" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

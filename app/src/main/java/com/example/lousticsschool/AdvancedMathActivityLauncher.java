@@ -15,7 +15,6 @@ import java.util.List;
 public class AdvancedMathActivityLauncher extends AppCompatActivity {
 
     private ChipGroup chipGroup;
-    private Button StartButton;
     private Slider slider;
 
     private String operator_list;
@@ -26,13 +25,13 @@ public class AdvancedMathActivityLauncher extends AppCompatActivity {
         setContentView(R.layout.activity_advanced_math_launcher);
 
         chipGroup = findViewById(R.id.cgOperation);
-        StartButton = findViewById(R.id.btnLaunch);
+        Button startButton = findViewById(R.id.btnLaunch);
         slider = findViewById(R.id.slider);
 
         operator_list = "";
 
 
-        StartButton.setOnClickListener(v -> {
+        startButton.setOnClickListener(v -> {
             List<Integer> selectedIds = chipGroup.getCheckedChipIds();
             System.out.println(selectedIds);
             for (int i = 0; i < selectedIds.size(); i++) {

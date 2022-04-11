@@ -1,6 +1,5 @@
 package com.example.lousticsschool;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -78,7 +77,7 @@ public class MathActivity extends AppCompatActivity {
 
         Answer.setOnEditorActionListener((textView, i, keyEvent) -> CheckResult(Answer.getText().toString()));
         // ask for confirmation in a dialog when the user clicks on the quit button
-        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user, true); });
+        Quit.setOnClickListener(view -> UtilsMethods.goToLoggedMenu(this, current_user, true));
 
         Answer.requestFocus();
 

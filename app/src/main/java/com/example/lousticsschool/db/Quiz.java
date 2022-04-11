@@ -4,7 +4,6 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity(tableName = "quiz")
 public class Quiz implements Serializable {

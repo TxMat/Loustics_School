@@ -1,7 +1,5 @@
 package com.example.lousticsschool;
 
-import static com.example.lousticsschool.UtilsMethods.calculateFromString;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,9 +22,8 @@ import java.util.List;
 public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerViewAdapter.ViewHolder> {
 
     private List<User> mData;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
-    private Context context;
+    private final LayoutInflater mInflater;
+    private final Context context;
 
     // data is passed into the constructor
     UserRecyclerViewAdapter(Context context, List<User> data) {
@@ -76,13 +72,9 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
     }
 
 
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-    }
-
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView myTextView;
+        final TextView myTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -100,9 +92,7 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
                     mData.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                 });
-                builder.setNegativeButton("Non, je ne veux pas supprimer", (dialog, which) -> {
-                    dialog.dismiss();
-                });
+                builder.setNegativeButton("Non, je ne veux pas supprimer", (dialog, which) -> dialog.dismiss());
                 builder.show();
                 return true;
             });

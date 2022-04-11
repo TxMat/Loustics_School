@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Database(entities = {User.class, Quiz.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
@@ -55,9 +56,8 @@ public abstract class AppDb extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private QuizDao quizDao;
         private PopulateDbAsyncTask(AppDb db) {
-            quizDao = db.quizDao();
+            QuizDao quizDao = db.quizDao();
         }
 
         @Override
@@ -74,7 +74,7 @@ public abstract class AppDb extends RoomDatabase {
         JSONArray jsonArray = loadJSONArray(context);
 
         try {
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < Objects.requireNonNull(jsonArray).length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 String question = jsonObject.getString("question");

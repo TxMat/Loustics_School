@@ -9,10 +9,9 @@ import java.util.ArrayList;
 
 public class MathModel implements Serializable {
     private int question_nb;
-    private ArrayList<String> calcul_array;
-    private ArrayList<Integer> user_answers;
-    private int total_questions;
-    private String CalcString;
+    private final ArrayList<String> calcul_array;
+    private final ArrayList<Integer> user_answers;
+    private final int total_questions;
 
     public MathModel(int total_questions, String operator_list) {
         // fill the hashmap with the operations with random operators
@@ -92,12 +91,6 @@ public class MathModel implements Serializable {
     public Bundle getNextBundle(){
         Bundle bundle = new Bundle();
         question_nb++;
-        bundle.putSerializable("mathModel", this);
-        return bundle;
-    }
-
-    public Bundle getBundle(){
-        Bundle bundle = new Bundle();
         bundle.putSerializable("mathModel", this);
         return bundle;
     }

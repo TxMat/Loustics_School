@@ -1,7 +1,6 @@
 package com.example.lousticsschool;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +13,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UtilsMethods extends AppCompatActivity {
 
     // ask user if they want to logout
@@ -25,9 +21,14 @@ public class UtilsMethods extends AppCompatActivity {
                 .setTitle("Se Deconnecter")
                 .setMessage("Voulez vous vraiment vous déconnecter ?")
                 .setPositiveButton("Oui", (dialog, which) -> {
+                        if (activity instanceof LoggedActivity) {
+                            ((LoggedActivity) activity).finish();
+                        } else {
                             Intent intent = new Intent(activity, MainActivity.class);
                             activity.startActivity(intent);
+                            activity.finish();
                         }
+                }
                 )
                 .setNegativeButton("Non", null)
                 .show();
@@ -80,13 +81,9 @@ public class UtilsMethods extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, R.style.Theme_Material3_Dark_Dialog_Alert));
             builder.setTitle("Abandonner");
             builder.setMessage("Voulez-vous vraiment abandonner ?\nVous perdrez toutes vos réponses.");
-            builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> {
-                Quit(activity, user);
-            }
+            builder.setPositiveButton("Oui, je veux quitter l'exercice", (dialog, which) -> Quit(activity, user)
             );
-            builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> {
-                dialog.dismiss();
-            });
+            builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> dialog.dismiss());
             builder.show();
         }
         else {
@@ -96,12 +93,17 @@ public class UtilsMethods extends AppCompatActivity {
     }
 
     public static void Quit(AppCompatActivity activity, User user){
-        Intent intent = new Intent(activity, LoggedActivity.class);
-        //clear all the activity stack
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("user", user);
-        activity.startActivity(intent);
-        activity.finish();
+        if (activity instanceof MathPickerActivity) {
+            ((MathPickerActivity) activity).finish();
+        }
+        else {
+            Intent intent = new Intent(activity, LoggedActivity.class);
+            //clear all the activity stack
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("user", user);
+            activity.startActivity(intent);
+            activity.finish();
+        }
     }
 
     public static int[] randomizeArray(int length) {

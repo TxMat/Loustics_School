@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,7 +76,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         String QuestionNumberString = "Question " + quizModel.getQuestionNb() + "/" + quizModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
 
-        Quit.setOnClickListener(view -> { UtilsMethods.goToLoggedMenu(this, current_user, true); });
+        Quit.setOnClickListener(view -> UtilsMethods.goToLoggedMenu(this, current_user, true));
 
         Question.setText(quizModel.getCurrentQuestionObject().getQuestion());
 
@@ -89,21 +88,13 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         Button3.setText(answers[randomIndexes[2]]);
         Button4.setText(answers[randomIndexes[3]]);
 
-        Button1.setOnClickListener(view -> {
-            CheckResult(Button1);
-        });
+        Button1.setOnClickListener(view -> CheckResult(Button1));
 
-        Button2.setOnClickListener(view -> {
-            CheckResult(Button2);
-        });
+        Button2.setOnClickListener(view -> CheckResult(Button2));
 
-        Button3.setOnClickListener(view -> {
-            CheckResult(Button3);
-        });
+        Button3.setOnClickListener(view -> CheckResult(Button3));
 
-        Button4.setOnClickListener(view -> {
-            CheckResult(Button4);
-        });
+        Button4.setOnClickListener(view -> CheckResult(Button4));
     }
 
     private void CheckResult(Button btn) {
@@ -149,7 +140,6 @@ public class CultureGeneraleActivity extends AppCompatActivity {
                     intent.putExtra("ID_LIST", quizModel.getIdList());
                     intent.putExtra("user", current_user);
                     startActivity(intent);
-                    finish();
                 } else {
                     // if we are not on the last question, go to the next question
                     Intent intent = new Intent(this, CultureGeneraleActivity.class);
@@ -157,8 +147,8 @@ public class CultureGeneraleActivity extends AppCompatActivity {
                     intent.putExtra("user", current_user);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.no_transition);
-                    finish();
                 }
+                finish();
             } else {
                 // if we are not ready, enable all buttons
                 for (Button button : buttons) {
@@ -170,12 +160,6 @@ public class CultureGeneraleActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //getQuestions();
-    }
 
     private void getQuestions() {
         ///////////////////////
