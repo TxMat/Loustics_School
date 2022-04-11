@@ -83,7 +83,7 @@ public class ResultActivity extends AppCompatActivity  {
 
         tvScore.setText("[ " + score + " / " + isCorrectArray.size() + " ]");
 
-        if (score < isCorrectArray.size() / 2) {
+        if (score == 0 || score < isCorrectArray.size() / 2) {
             tvTitle.setText(R.string.try_again);
         }
         else if (score < isCorrectArray.size() * 3 / 4) {

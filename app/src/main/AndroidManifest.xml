@@ -29,6 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".ResultActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MathActivity"
