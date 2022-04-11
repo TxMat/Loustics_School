@@ -51,7 +51,7 @@ public class AdvancedMathActivityLauncher extends AppCompatActivity {
                 }
             }
             if (operator_list.length() == 0) {
-                Toast.makeText(getApplicationContext(), "Please select at least one operation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Selectionne au moins un type d'operation", Toast.LENGTH_SHORT).show();
             } else {
                 UtilsMethods.startMathActivity(this, (User) getIntent().getSerializableExtra("user"), operator_list, (int) slider.getValue());
             }

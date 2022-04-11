@@ -96,7 +96,7 @@
 
             <Button
                 android:id="@+id/LogoutButton"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

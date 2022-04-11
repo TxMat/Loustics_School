@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"
+            android:backgroundTint="#CE93D8"
             android:stepSize="1"
             android:value="10"
             android:valueFrom="1"

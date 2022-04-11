@@ -10,7 +10,7 @@
     <string name="culture_generale">Culture Generale</string>
     <string name="logoutString">Se déconnecter</string>
     <string name="quit">Quitter</string>
-    <string name="version">Version 0.0.1</string>
+    <string name="version">Version 1.0</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
