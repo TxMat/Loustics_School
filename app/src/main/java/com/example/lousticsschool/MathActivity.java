@@ -163,8 +163,8 @@ public class MathActivity extends AppCompatActivity {
             }
         }
 
-        UpdateUser gu = new UpdateUser();
-        gu.execute();
+        UpdateUser uu = new UpdateUser();
+        uu.execute();
     }
 
 

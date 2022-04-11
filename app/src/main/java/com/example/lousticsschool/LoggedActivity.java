@@ -29,7 +29,6 @@ public class LoggedActivity extends UtilsMethods {
         AppDb db = AppDb.getInstance(this);
 
         current_user = (User) getIntent().getSerializableExtra("user");
-        // print user attributes for debugging
 
         // date and time
         LocalDate date = LocalDate.now();

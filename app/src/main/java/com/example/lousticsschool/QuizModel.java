@@ -31,7 +31,7 @@ public class QuizModel implements Serializable {
                 question_array.add(quiz);
                 idList.add(quiz.getId());
             } else {
-                i--;
+                i--; // more efficient than while loop DRY
             }
         }
 

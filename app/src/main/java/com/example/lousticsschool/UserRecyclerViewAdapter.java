@@ -60,7 +60,7 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
 
     public void updateData(ArrayList<User> usersList) {
         mData = usersList;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // can probably be optimized
     }
 
 

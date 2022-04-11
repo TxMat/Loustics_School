@@ -22,10 +22,12 @@ public class MathModel implements Serializable {
         for (int i = 0; i < total_questions; i++) {
             // check if the calculation is not already in the arraylist if it is, generate a new one
             String calc = RandomizeCalc(2,100,operator_list);
-            while (calcul_array.contains(calc)) {
-                calc = RandomizeCalc(2,100,operator_list);
+            if (!calcul_array.contains(calc)) {
+                calcul_array.add(calc);
+            } else {
+                i--; // more efficient than while loop DRY
             }
-            calcul_array.add(calc);
+
         }
     }
 

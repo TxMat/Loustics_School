@@ -184,7 +184,7 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         //////////////////////////
         // IMPORTANT bien penser à executer la demande asynchrone
         // Création d'un objet de type GetTasks et execution de la demande asynchrone
-        GetQuestions gu = new GetQuestions();
-        gu.execute();
+        GetQuestions gq = new GetQuestions();
+        gq.execute();
     }
 }

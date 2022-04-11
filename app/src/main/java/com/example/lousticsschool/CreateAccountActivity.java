@@ -42,7 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         // Vérifier les informations fournies par l'utilisateur
         if (sName.isEmpty()) {
-            etName.setError("Task required");
+            etName.setError("Entez un nom");
             etName.requestFocus();
             return;
         }
@@ -76,13 +76,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                 // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
                 setResult(RESULT_OK);
                 finish();
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Sauvgradé avec succes !", Toast.LENGTH_LONG).show();
             }
         }
 
-        //////////////////////////
-        // IMPORTANT bien penser à executer la demande asynchrone
-        SaveUser st = new SaveUser();
-        st.execute();
+        SaveUser su = new SaveUser();
+        su.execute();
     }
 }

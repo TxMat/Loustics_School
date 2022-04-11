@@ -34,21 +34,23 @@ public class AdvancedMathActivityLauncher extends AppCompatActivity {
         startButton.setOnClickListener(v -> {
             List<Integer> selectedIds = chipGroup.getCheckedChipIds();
             System.out.println(selectedIds);
+            StringBuilder sb = new StringBuilder(operator_list);
             for (int i = 0; i < selectedIds.size(); i++) {
                 int id = selectedIds.get(i);
                 if (id == R.id.chipAdd) {
-                    operator_list += "+";
+                    sb.append("+");
                 }
                 if (id == R.id.chipSubtract) {
-                    operator_list += "-";
+                    sb.append("-");
                 }
                 if (id == R.id.chipMultiply) {
-                    operator_list += "x";
+                    sb.append("x");
                 }
                 if (id == R.id.chipDivide) {
-                    operator_list += "/";
+                    sb.append("/");
                 }
             }
+            operator_list = sb.toString();
             if (operator_list.length() == 0) {
                 Toast.makeText(getApplicationContext(), "Selectionne au moins un type d'operation", Toast.LENGTH_SHORT).show();
             } else {
