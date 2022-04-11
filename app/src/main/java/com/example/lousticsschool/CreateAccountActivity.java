@@ -76,7 +76,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 // Quand la tache est créée, on arrête l'activité AddTaskActivity (on l'enleve de la pile d'activités)
                 setResult(RESULT_OK);
                 finish();
-                Toast.makeText(getApplicationContext(), "Sauvgradé avec succes !", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Sauvgardé avec succes !", Toast.LENGTH_LONG).show();
             }
         }
 

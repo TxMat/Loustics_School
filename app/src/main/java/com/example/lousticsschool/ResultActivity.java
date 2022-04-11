@@ -83,13 +83,13 @@ public class ResultActivity extends AppCompatActivity  {
 
         tvScore.setText("[ " + score + " / " + isCorrectArray.size() + " ]");
 
-        if (score == 0 || score < isCorrectArray.size() / 2) {
+        if (score < isCorrectArray.size() / 2 || score == 0) {
             tvTitle.setText(R.string.try_again);
         }
-        else if (score < isCorrectArray.size() * 3 / 4) {
+        else if (score <= isCorrectArray.size() * 3 / 4) {
             tvTitle.setText(R.string.almost_there);
         }
-        else if (score > isCorrectArray.size() * 3 / 4 && score < isCorrectArray.size()) {
+        else if (score >= isCorrectArray.size() * 3 / 4 && score < isCorrectArray.size()) {
             tvTitle.setText(R.string.almost_perfect);
         }
         else if (score == isCorrectArray.size()) {
