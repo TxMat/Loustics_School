@@ -36,9 +36,6 @@ public class QuizModel implements Serializable {
         }
 
 
-
-
-
     }
 
     public ArrayList<Long> getIdList() {
@@ -77,7 +74,7 @@ public class QuizModel implements Serializable {
         return question_array.get(question_nb - 1);
     }
 
-    public Bundle getNextBundle(){
+    public Bundle getNextBundle() {
         Bundle bundle = new Bundle();
         question_nb++;
         bundle.putSerializable("quizModel", this);

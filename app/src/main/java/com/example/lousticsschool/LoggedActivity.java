@@ -17,7 +17,7 @@ public class LoggedActivity extends UtilsMethods {
 
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         UtilsMethods.Logout(this);
     }
 

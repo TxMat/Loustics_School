@@ -1,7 +1,5 @@
 package com.example.lousticsschool;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -10,6 +8,8 @@ import android.os.Handler;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.Quiz;
@@ -67,12 +67,9 @@ public class CultureGeneraleActivity extends AppCompatActivity {
         }
 
 
-
-
-
     }
 
-    private void initialize(){
+    private void initialize() {
         String QuestionNumberString = "Question " + quizModel.getQuestionNb() + "/" + quizModel.getTotalQuestionsNb();
         QuestionNumber.setText(QuestionNumberString);
 

@@ -24,5 +24,4 @@ public interface UserDao {
     long insert(User user);
 
 
-
 }

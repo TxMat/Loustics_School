@@ -8,10 +8,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MathModel implements Serializable {
-    private int question_nb;
     private final ArrayList<String> calcul_array;
     private final ArrayList<Integer> user_answers;
     private final int total_questions;
+    private int question_nb;
 
     public MathModel(int total_questions, String operator_list) {
         // fill the hashmap with the operations with random operators
@@ -21,7 +21,7 @@ public class MathModel implements Serializable {
         this.calcul_array = new ArrayList<>();
         for (int i = 0; i < total_questions; i++) {
             // check if the calculation is not already in the arraylist if it is, generate a new one
-            String calc = RandomizeCalc(2,100,operator_list);
+            String calc = RandomizeCalc(2, 100, operator_list);
             if (!calcul_array.contains(calc)) {
                 calcul_array.add(calc);
             } else {
@@ -29,6 +29,31 @@ public class MathModel implements Serializable {
             }
 
         }
+    }
+
+    public static int getRandomInt(int min, int max) {
+        return (int) (Math.random() * ((max - min) + 1)) + min;
+    }
+
+    @NonNull
+    public static String RandomizeCalc(int min, int max, @NonNull String operator_list) {
+        String operator = operator_list.charAt((int) (Math.random() * operator_list.length())) + "";
+        int randomSecondNumber;
+        int randomFirstNumber;
+        if (operator.equals("x")) {
+            max = max / 10;
+        }
+        randomFirstNumber = getRandomInt(min, max);
+        if (operator.equals("/")) {
+            max = max / 10;
+        }
+        randomSecondNumber = getRandomInt(min, max);
+        while (operator.equals("/") && randomFirstNumber % randomSecondNumber != 0) {
+            randomFirstNumber = getRandomInt(min, max);
+            randomSecondNumber = getRandomInt(min, max / 10);
+        }
+
+        return randomFirstNumber + " " + operator + " " + randomSecondNumber;
     }
 
     public int getCurrentQuestionNb() {
@@ -59,46 +84,19 @@ public class MathModel implements Serializable {
 
     }
 
+    public void setCurrentAnswer(String answer) {
+        user_answers.add(Integer.valueOf(answer));
+    }
+
     public boolean isLastQuestion() {
         return question_nb == total_questions;
     }
 
-
-    public static int getRandomInt(int min, int max) {
-        return (int) (Math.random() * ((max - min) + 1)) + min;
-    }
-
-
-    @NonNull
-    public static String RandomizeCalc(int min, int max, @NonNull String operator_list) {
-        String operator = operator_list.charAt((int) (Math.random() * operator_list.length())) + "";
-        int randomSecondNumber;
-        int randomFirstNumber;
-        if (operator.equals("x")) {
-            max = max / 10;
-        }
-        randomFirstNumber = getRandomInt(min, max);
-        if (operator.equals("/")) {
-            max = max / 10;
-        }
-        randomSecondNumber = getRandomInt(min, max);
-        while (operator.equals("/") && randomFirstNumber % randomSecondNumber != 0) {
-            randomFirstNumber = getRandomInt(min, max);
-            randomSecondNumber = getRandomInt(min, max/10);
-        }
-
-        return randomFirstNumber + " " + operator + " " + randomSecondNumber;
-    }
-
-    public Bundle getNextBundle(){
+    public Bundle getNextBundle() {
         Bundle bundle = new Bundle();
         question_nb++;
         bundle.putSerializable("mathModel", this);
         return bundle;
-    }
-
-    public void setCurrentAnswer(String answer) {
-        user_answers.add(Integer.valueOf(answer));
     }
 
     public ArrayList<Integer> GetAnswerArray() {

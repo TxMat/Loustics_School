@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ResultActivity"
+    android:orientation="vertical"
     android:weightSum="3"
-    android:orientation="vertical">
+    tools:context=".ResultActivity">
 
 
     <LinearLayout
@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:text="@string/chgex" />
 
-            <!-- sorry android studio -->
+        <!-- sorry android studio -->
 
         <Button
             android:id="@+id/RetryButton"

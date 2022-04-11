@@ -2,20 +2,20 @@ package com.example.lousticsschool;
 
 import static com.example.lousticsschool.UtilsMethods.calculateFromString;
 
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.example.lousticsschool.db.User;
 
 import java.util.ArrayList;
 
-public class ResultActivity extends AppCompatActivity  {
+public class ResultActivity extends AppCompatActivity {
 
     private ResultRecyclerViewAdapter adapter;
     private ArrayList<Boolean> isCorrectArray = new ArrayList<>();
@@ -43,7 +43,6 @@ public class ResultActivity extends AppCompatActivity  {
 
         btnBack.setOnClickListener(v -> onBackPressed());
         btnRestart.setOnClickListener(v -> goToExercice(this, exerciceType));
-
 
 
         // initialize isCorrect array by comparing the user's answer with the correct answer
@@ -85,14 +84,11 @@ public class ResultActivity extends AppCompatActivity  {
 
         if (score < isCorrectArray.size() / 2 || score == 0) {
             tvTitle.setText(R.string.try_again);
-        }
-        else if (score <= isCorrectArray.size() * 3 / 4) {
+        } else if (score <= isCorrectArray.size() * 3 / 4) {
             tvTitle.setText(R.string.almost_there);
-        }
-        else if (score >= isCorrectArray.size() * 3 / 4 && score < isCorrectArray.size()) {
+        } else if (score >= isCorrectArray.size() * 3 / 4 && score < isCorrectArray.size()) {
             tvTitle.setText(R.string.almost_perfect);
-        }
-        else if (score == isCorrectArray.size()) {
+        } else if (score == isCorrectArray.size()) {
             tvTitle.setText(R.string.perfect);
         }
 
@@ -103,14 +99,12 @@ public class ResultActivity extends AppCompatActivity  {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-
     }
 
     private void goToExercice(ResultActivity resultActivity, String exerciceType) {
         if (exerciceType.equals("Math")) {
             UtilsMethods.startMathActivity(resultActivity, current_user, getIntent().getStringExtra("oplist"), getIntent().getIntExtra("qnb", 10));
-        }
-        else if (exerciceType.equals("Quiz")) {
+        } else if (exerciceType.equals("Quiz")) {
             UtilsMethods.startCGActivity(resultActivity, current_user);
         }
 

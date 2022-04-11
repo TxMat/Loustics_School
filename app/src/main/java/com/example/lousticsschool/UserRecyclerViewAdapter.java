@@ -21,9 +21,9 @@ import java.util.List;
 
 public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerViewAdapter.ViewHolder> {
 
-    private List<User> mData;
     private final LayoutInflater mInflater;
     private final Context context;
+    private List<User> mData;
 
     // data is passed into the constructor
     UserRecyclerViewAdapter(Context context, List<User> data) {
@@ -62,8 +62,6 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
         mData = usersList;
         notifyDataSetChanged(); // can probably be optimized
     }
-
-
 
 
     // convenience method for getting data at click position
@@ -105,9 +103,6 @@ public class UserRecyclerViewAdapter extends RecyclerView.Adapter<UserRecyclerVi
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });
-
-
-
 
 
         }

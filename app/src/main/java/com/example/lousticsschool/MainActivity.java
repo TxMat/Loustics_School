@@ -1,8 +1,9 @@
 package com.example.lousticsschool;
 
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +12,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.widget.Button;
-
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCenter.start(getApplication(), "3ef297a4-af14-4683-bd9b-5d453624f715",
-                Analytics.class, Crashes.class);
+                Analytics.class, Crashes.class); // app center pour les statistiques & les erreurs
+        // ( Si vous arrivez a crash l'application et que vous etes conectés à internet, je pouvez voir les erreurs :)
+        // a condition que vous arriviez a la crash en premier lieu ;) )
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -107,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         GetUsers gu = new GetUsers();
         gu.execute();
     }
-
 
 
     @Override

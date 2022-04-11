@@ -1,12 +1,12 @@
 package com.example.lousticsschool;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lousticsschool.db.AppDb;
 import com.example.lousticsschool.db.User;

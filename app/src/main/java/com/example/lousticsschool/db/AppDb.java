@@ -27,11 +27,14 @@ import java.util.Objects;
 @TypeConverters({Converters.class})
 public abstract class AppDb extends RoomDatabase {
 
-    public abstract UserDao userDao();
-    public abstract QuizDao quizDao();
-
     private static AppDb INSTANCE;
-
+    private static final RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            new PopulateDbAsyncTask(INSTANCE).execute();
+        }
+    };
     private static Context ctx;
 
     public static synchronized AppDb getInstance(Context context) {
@@ -46,28 +49,6 @@ public abstract class AppDb extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-    private static final RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            new PopulateDbAsyncTask(INSTANCE).execute();
-        }
-    };
-
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private PopulateDbAsyncTask(AppDb db) {
-            QuizDao quizDao = db.quizDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            fillWithStartingData(ctx);
-            return null;
-        }
-
-    }
-
 
     private static void fillWithStartingData(Context context) {
         QuizDao quizDao = getInstance(context).quizDao();
@@ -98,10 +79,6 @@ public abstract class AppDb extends RoomDatabase {
                 quizDao.insert(quiz);
 
 
-
-
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -128,6 +105,23 @@ public abstract class AppDb extends RoomDatabase {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public abstract UserDao userDao();
+
+    public abstract QuizDao quizDao();
+
+    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
+        private PopulateDbAsyncTask(AppDb db) {
+            QuizDao quizDao = db.quizDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            fillWithStartingData(ctx);
+            return null;
+        }
+
     }
 
 

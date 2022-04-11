@@ -24,13 +24,13 @@ import java.util.List;
 
 public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<Long> idList;
     private final List<String> mData;
     private final LayoutInflater mInflater;
     private final List<Boolean> isCorrectArray;
     private final List<Boolean> isCorrectedArray;
     private final String exerciceType;
     private final Context context;
+    private ArrayList<Long> idList;
 
     // data is passed into the constructor
     ResultRecyclerViewAdapter(Context context, List<String> data, List<Boolean> isCorrectArray, String exerciceType) {
@@ -181,8 +181,6 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
         }
 
     }
-
-
 
 
 }

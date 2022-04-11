@@ -30,13 +30,13 @@
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/name"
             android:imeOptions="actionDone"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:textColor="#757575"
-            android:autofillHints="" />
+            android:textColor="#757575" />
 
         <Button
             android:id="@+id/AddUserButton"

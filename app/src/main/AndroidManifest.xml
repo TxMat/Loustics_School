@@ -30,8 +30,8 @@
         <activity
             android:name=".ResultActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MathActivity"
             android:exported="true"

@@ -21,14 +21,14 @@ public class UtilsMethods extends AppCompatActivity {
                 .setTitle("Se Deconnecter")
                 .setMessage("Voulez vous vraiment vous déconnecter ?")
                 .setPositiveButton("Oui", (dialog, which) -> {
-                        if (activity instanceof LoggedActivity) {
-                            ((LoggedActivity) activity).finish();
-                        } else {
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            activity.startActivity(intent);
-                            activity.finish();
+                            if (activity instanceof LoggedActivity) {
+                                ((LoggedActivity) activity).finish();
+                            } else {
+                                Intent intent = new Intent(activity, MainActivity.class);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }
                         }
-                }
                 )
                 .setNegativeButton("Non", null)
                 .show();
@@ -85,18 +85,16 @@ public class UtilsMethods extends AppCompatActivity {
             );
             builder.setNegativeButton("Non, je veux continuer", (dialog, which) -> dialog.dismiss());
             builder.show();
-        }
-        else {
+        } else {
             Quit(activity, user);
         }
 
     }
 
-    public static void Quit(AppCompatActivity activity, User user){
+    public static void Quit(AppCompatActivity activity, User user) {
         if (activity instanceof MathPickerActivity) {
             ((MathPickerActivity) activity).finish();
-        }
-        else {
+        } else {
             Intent intent = new Intent(activity, LoggedActivity.class);
             //clear all the activity stack
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -146,16 +144,16 @@ public class UtilsMethods extends AppCompatActivity {
     }
 
 
-        public static void startMathActivity(AppCompatActivity context, User user, String opList, int qnb) {
-            Intent intent = new Intent(context, MathActivity.class);
-            intent.putExtra("oplist", opList);
-            intent.putExtra("user", user);
-            intent.putExtra("qnb", qnb);
-            intent.putExtra("init", "true");
-            context.startActivity(intent);
-            context.finish();
-        }
+    public static void startMathActivity(AppCompatActivity context, User user, String opList, int qnb) {
+        Intent intent = new Intent(context, MathActivity.class);
+        intent.putExtra("oplist", opList);
+        intent.putExtra("user", user);
+        intent.putExtra("qnb", qnb);
+        intent.putExtra("init", "true");
+        context.startActivity(intent);
+        context.finish();
     }
+}
 
 // End of file
 // Path: src/main/java/com/example/lousticsschool/UtilsMethods.java
