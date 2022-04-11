@@ -14,10 +14,10 @@
 
         <TextView
             android:id="@+id/Greetings"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Bonjour, User"
+            android:text="@string/greet"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="30sp"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="Nous Sommes le DATE is est HEURE"
+            android:text="@string/dtph"
             android:textAlignment="center" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="NB Questions  ef ef efefefe ef efrepondues"
+            android:text="@string/qnb"
             android:textAlignment="center" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="PP% de reponses justes"
+            android:text="@string/percentage"
             android:textAlignment="center" />
 
     </LinearLayout>

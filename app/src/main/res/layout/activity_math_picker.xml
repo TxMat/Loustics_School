@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Que veux tu travailler ?" />
+            android:text="@string/explain_sting" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,18 +26,18 @@
 
             <Button
                 android:id="@+id/AdditionsButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="Additions"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/add" />
 
             <Button
                 android:id="@+id/SoustractionsButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Soustractions"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/sub" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,18 +47,18 @@
 
             <Button
                 android:id="@+id/MultiplicationsButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="Multiplications"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/mult" />
 
             <Button
                 android:id="@+id/DivisionsButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Divisions"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/div" />
         </LinearLayout>
 
         <Button
@@ -66,14 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Aleatoire" />
+            android:text="@string/random" />
 
         <Button
             android:id="@+id/AdvancedOptionsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:text="Options Avancés" />
+            android:text="@string/adv_ops" />
 
     </LinearLayout>
 

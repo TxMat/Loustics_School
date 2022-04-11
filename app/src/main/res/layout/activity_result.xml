@@ -76,6 +76,8 @@
             android:layout_weight="1"
             android:text="@string/chgex" />
 
+            <!-- sorry android studio -->
+
         <Button
             android:id="@+id/RetryButton"
             style="?android:attr/buttonBarButtonStyle"

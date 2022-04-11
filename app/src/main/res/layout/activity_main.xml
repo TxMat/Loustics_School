@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="Qui utilise l'application ?"
+        android:text="@string/who_is_using_app"
         android:textAlignment="center"
         android:textSize="24sp"
         android:typeface="normal" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="Appuie sur ton profil ci dessous"
+        android:text="@string/profie_hint"
         android:textAlignment="center"
         android:textSize="16sp"
         android:typeface="normal" />
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="(Appui long pour supprimer)"
+        android:text="@string/supress_hint"
         android:textAlignment="center"
         android:textSize="12sp"
         android:typeface="normal" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="Pas dans la liste ?"
+            android:text="@string/not_in_list"
             android:textAlignment="center"
             android:textSize="24sp"
             android:typeface="normal" />
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="pas de soucis!\nutilisez les boutons ci dessous :"
+            android:text="@string/use_btn_hint"
             android:textAlignment="center"
             android:textSize="16sp"
             android:typeface="normal" />
@@ -82,13 +82,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Creer un compte" />
+                android:text="@string/create_account" />
 
             <Button
                 android:id="@+id/GuestButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Continuer en invité"
+                android:text="@string/go_as_guest"
                 android:textAlignment="center" />
         </LinearLayout>
 

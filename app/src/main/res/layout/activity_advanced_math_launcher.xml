@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Type d'operations"
+            android:text="@string/typeop"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -41,14 +42,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:text="Soustractions" />
+                    android:text="@string/sub" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:text="Additions"
+                    android:text="@string/add"
                     android:textAlignment="center" />
 
                 <com.google.android.material.chip.Chip
@@ -57,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:fontFamily="casual"
-                    android:text="Divisions"
+                    android:text="@string/div"
                     android:textSize="14sp" />
 
                 <com.google.android.material.chip.Chip
@@ -65,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:text="Multiplicatons" />
+                    android:text="@string/mult" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -83,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Nombre de questions"
+            android:text="@string/nbq"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -94,10 +95,12 @@
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"
             android:backgroundTint="#CE93D8"
+            android:contentDescription="@string/nbq"
             android:stepSize="1"
             android:value="10"
             android:valueFrom="1"
-            android:valueTo="50" />
+            android:valueTo="50"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
     </LinearLayout>
 
@@ -112,7 +115,7 @@
             android:id="@+id/btnLaunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lancer l'exercice"
+            android:text="@string/launchex"
             android:textAlignment="center" />
     </LinearLayout>
 </LinearLayout>

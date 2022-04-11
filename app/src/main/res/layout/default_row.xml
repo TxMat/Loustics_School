@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="20 x 50 = 10"
+        android:text="@string/row_ph"
         android:textAlignment="center"
         android:textSize="34sp" />
 
