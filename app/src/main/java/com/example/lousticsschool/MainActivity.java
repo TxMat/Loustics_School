@@ -1,5 +1,9 @@
 package com.example.lousticsschool;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCenter.start(getApplication(), "3ef297a4-af14-4683-bd9b-5d453624f715",
+                Analytics.class, Crashes.class);
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
